@@ -1,0 +1,24 @@
+{
+  "name": "short-stories",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MS-load/Short-Stories.git"
+  },
+  "author": "MS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MS-load/Short-Stories/issues"
+  },
+  "homepage": "https://github.com/MS-load/Short-Stories#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.12"
+  }
+}
