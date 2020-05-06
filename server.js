@@ -3,6 +3,8 @@ require('./connect')
 const express = require('express')
 const app = express()
 
+const stories = require('./models/stories')
+
 const cors = require('cors');
 app.use(cors());
 app.use(express.json())
@@ -22,9 +24,7 @@ app.use((res, req, next)=>{
 app.get('/', (req, res) => res.send('Hello World!'))
 
 //All database endpoints
-//app.use('/messages', messages)
-
-
+app.use('/stories', stories)
 
 app.use((error, req, res, next)=>{
     console.log(error)
