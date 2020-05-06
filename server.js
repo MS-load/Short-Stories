@@ -3,7 +3,7 @@ require('./connect')
 const express = require('express')
 const app = express()
 
-const stories = require('./models/stories')
+const stories = require('./models/storiesModel')
 
 const cors = require('cors');
 app.use(cors());
