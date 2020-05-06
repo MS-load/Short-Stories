@@ -1,0 +1,7 @@
+POST http://localhost:3000/stories
+Content-Type: application/json
+
+{   
+    "title": "The mad boy2",
+    "body":"The was a boy who was mad"
+}
