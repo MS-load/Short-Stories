@@ -2,6 +2,19 @@ POST http://localhost:3000/stories
 Content-Type: application/json
 
 {   
-    "title": "The mad boy2",
-    "body":"The was a boy who was mad"
+    "title": "The mad family",
+    "body":"There was a mad family",
+    "author":"MS"
+}
+
+###
+GET http://localhost:3000/stories
+
+###
+PUT http://localhost:3000/stories
+Content-Type: application/json
+
+{
+    "body":"Hello World Testing!",
+    "id": "5eb441cf0dc3513ff4cfde39"
 }
