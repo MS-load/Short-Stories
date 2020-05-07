@@ -21,29 +21,31 @@ router.post('/', async (req, res) => {
 
 //Read all Stories
 router.get('/', (req, res) => {
-        console.log(req.body)
-        StoryModel.find((err, allStories) => {
-            if (err) return res.status(500).send(err)
-            return res.status(200).send(allStories);
-        })   
+    console.log(req.body)
+    StoryModel.find((err, allStories) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(allStories);
+    })
 })
 
 //Update specific story
 router.put('/', (req, res) => {
-        const { id } = req.body
-        StoryModel.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
-            if (err) return res.status(500).send(err);
-            return res.status(200).send(story)
-        })
+    const { id } = req.body
+    StoryModel.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
+        if (err) return res.status(500).send(err);
+        return res.status(200).send(story)
+    })
 })
 
 //Delete all Stories
-router.delete('/', async (req, res) => {
-    try {
-
-    }
-    catch (error) {
-        console.log(error);
-    }
+router.delete('/', (req, res) => {
+    const { id } = req.body
+    StoryModel.findByIdAndRemove(id, { new: true, useFindAndModify: false }, (err, story) => {
+        if (err) return res.status(500).send(err);
+        return res.status(200).send({
+            message: "successfully deleted",
+            id: id
+        })
+    })
 })
 module.exports = router;

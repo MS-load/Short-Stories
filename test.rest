@@ -18,3 +18,12 @@ Content-Type: application/json
     "body":"Hello World Testing!",
     "id": "5eb441cf0dc3513ff4cfde39"
 }
+
+###
+DELETE http://localhost:3000/stories
+Content-Type: application/json
+
+{
+    "body":"Hello World Testing!",
+    "id": "5eb441cf0dc3513ff4cfde39"
+}
