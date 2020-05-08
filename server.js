@@ -1,3 +1,6 @@
+require('./connect')
+
+
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -30,7 +33,6 @@ app.use('/users', Users)
 app.listen(port, () => {
     console.log(`Server is running on ${port}`)
 })
-// require('./connect')
 
 
 
