@@ -1,0 +1,32 @@
+POST http://localhost:3000/stories
+Content-Type: application/json
+
+{   
+    "title": "Home 1",
+    "body":"work 1",
+    "author":"GRS"
+}
+
+###
+GET http://localhost:3000/stories?page=1&limit=3
+
+###
+GET http://localhost:3000/stories/author?author=Dhas&page=1&limit=3
+
+###
+PUT http://localhost:3000/stories
+Content-Type: application/json
+
+{
+    "body":"Hello World Testing!",
+    "id": "5eb4720ea8dae0556cb7b7dd"
+}
+
+###
+DELETE http://localhost:3000/stories
+Content-Type: application/json
+
+{
+    "body":"Hello World Testing!",
+    "id": "5eb441cf0dc3513ff4cfde39"
+}
