@@ -22,17 +22,18 @@ router.post('/', async (req, res) => {
 //Read all Stories
 router.get('/', async (req, res) => {
     const { page = 1, limit = 3 } = req.query;
-      try {
+    try {
         const allStories = await StoryModel.find()
+            .sort('-createdAt')
             .limit(limit * 1)
             .skip((page - 1) * limit)
 
-            const count = await StoryModel.countDocuments();
-            res.json({
-                allStories,
-                totalPages: Math.ceil(count / limit),
-                currentPage: page
-            })
+        const count = await StoryModel.countDocuments();
+        res.json({
+            allStories,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        })
     }
     catch (error) {
         console.log(error)

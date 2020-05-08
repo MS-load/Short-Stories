@@ -2,13 +2,13 @@ POST http://localhost:3000/stories
 Content-Type: application/json
 
 {   
-    "title": "The mad family",
+    "title": "Timeline series 5/5",
     "body":"There was a mad family",
     "author":"MS"
 }
 
 ###
-GET http://localhost:3000/stories?page=1&limit=2
+GET http://localhost:3000/stories?page=1&limit=3
 
 ###
 PUT http://localhost:3000/stories
