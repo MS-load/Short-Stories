@@ -30,3 +30,14 @@ Content-Type: application/json
     "body":"Hello World Testing!",
     "id": "5eb441cf0dc3513ff4cfde39"
 }
+
+### 
+POST http://localhost:4000/users/register
+Content-Type: application/json
+
+{
+    "first_name": "Bob",
+    "last_name": "Dylan",
+    "email": "test@test.com",
+    "password": "test"
+}

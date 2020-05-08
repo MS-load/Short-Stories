@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -23,7 +23,7 @@ mongoose
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
 
-const Users = require('./routes/Users')
+const Users = require('./routers/Users')
 
 app.use('/users', Users)
 
