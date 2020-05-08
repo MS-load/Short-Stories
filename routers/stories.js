@@ -40,6 +40,26 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/author', async (req, res) => {
+    const {author='', page = 1, limit = 3 } = req.query;
+    const {} = req.body
+    try {
+        const allStories = await StoryModel.find({author: author})
+            .sort('-createdAt')
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+
+        const count = await StoryModel.countDocuments();
+        res.json({
+            allStories,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+})
 //Update specific story
 router.put('/', (req, res) => {
     const { id } = req.body
@@ -60,4 +80,5 @@ router.delete('/', (req, res) => {
         })
     })
 })
+
 module.exports = router;
