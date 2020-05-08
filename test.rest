@@ -1,4 +1,4 @@
-POST http://localhost:3000/stories
+POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
@@ -8,13 +8,13 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/stories?page=1&limit=3
+GET http://localhost:5000/stories?page=1&limit=3
 
 ###
-GET http://localhost:3000/stories/author?author=Dhas&page=1&limit=3
+GET http://localhost:5000/stories/author?author=Dhas&page=1&limit=3
 
 ###
-PUT http://localhost:3000/stories
+PUT http://localhost:5000/stories
 Content-Type: application/json
 
 {
@@ -23,10 +23,35 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/stories
+DELETE http://localhost:5000/stories
 Content-Type: application/json
 
 {
     "body":"Hello World Testing!",
     "id": "5eb441cf0dc3513ff4cfde39"
 }
+
+
+// UserData
+### 
+POST http://localhost:5000/users/register
+Content-Type: application/json
+
+{
+    "first_name": "Bob",
+    "last_name": "Dylan",
+    "email": "test@test.com",
+    "password": "test"
+}
+
+### 
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test" 
+}
+
+###
+GET http://localhost:5000/users/login
