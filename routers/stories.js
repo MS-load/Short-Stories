@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         const storyInfo = await new StoryModel(story)
         const storySave = await storyInfo.save()
         console.log(storySave)
-        res.send(JSON.stringify(storySave))
+        return res.status(200).send(JSON.stringify(storySave))
     }
     catch (error) {
         console.log(error);
@@ -20,12 +20,23 @@ router.post('/', async (req, res) => {
 })
 
 //Read all Stories
-router.get('/', (req, res) => {
-    console.log(req.body)
-    StoryModel.find((err, allStories) => {
-        if (err) return res.status(500).send(err)
-        return res.status(200).send(allStories);
-    })
+router.get('/', async (req, res) => {
+    const { page = 1, limit = 3 } = req.query;
+      try {
+        const allStories = await StoryModel.find()
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+
+            const count = await StoryModel.countDocuments();
+            res.json({
+                allStories,
+                totalPages: Math.ceil(count / limit),
+                currentPage: page
+            })
+    }
+    catch (error) {
+        console.log(error)
+    }
 })
 
 //Update specific story

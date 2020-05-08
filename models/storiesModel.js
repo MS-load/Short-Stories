@@ -7,18 +7,20 @@ let StoriesSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    author:{
+    author: {
         type: String,
         required: true
     },
-    body:{
-        type:String,
+    body: {
+        type: String,
         required: true
     },
-    likes:{
+    likes: {
         type: Number,
         required: false
     }
-})
+},
+    { timestamps: true }
+)
 
 module.exports = mongoose.model('Stories', StoriesSchema)

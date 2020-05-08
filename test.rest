@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/stories
+GET http://localhost:3000/stories?page=1&limit=2
 
 ###
 PUT http://localhost:3000/stories
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
     "body":"Hello World Testing!",
-    "id": "5eb441cf0dc3513ff4cfde39"
+    "id": "5eb4720ea8dae0556cb7b7dd"
 }
 
 ###
