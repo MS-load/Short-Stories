@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 75px;
+    position: sticky;
+    background-color: aqua;
+    margin: 0;
+}
+
+.placeholderIcon{
+    height: 100%;
+    width: 75px;
+    margin: 0em;
+    background-color: black;
+}
+
+.name {
+    width: 80%;
+}
+
+.registration {
+    width: 10%;
+}
+
+.login {
+    width: 10%;
+}
