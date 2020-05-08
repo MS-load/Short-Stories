@@ -2,9 +2,9 @@ POST http://localhost:3000/stories
 Content-Type: application/json
 
 {   
-    "title": "Timeline series 589001",
-    "body":"There was a mad family",
-    "author":"Dhas"
+    "title": "Home 1",
+    "body":"work 1",
+    "author":"GRS"
 }
 
 ###
