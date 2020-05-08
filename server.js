@@ -6,10 +6,11 @@ const cors = require('cors')
 
 
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(cors())
+//express body parser
 app.use(
     express.urlencoded({
         extended: false

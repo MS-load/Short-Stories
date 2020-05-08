@@ -28,7 +28,7 @@ users.post('/register', (req, res) => {
           userData.password = hash
           User.create(userData)
             .then(user => {
-              res.json({ status: user.email + 'Registered!' })
+              res.json({ status: user.email + ' Registered!' })
             })
             .catch(err => {
               res.send('error: ' + err)
@@ -75,7 +75,7 @@ users.post('/login', (req, res) => {
   })
 
   users.get('/profile', (req, res) => {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+    const decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
   
     User.findOne({
       _id: decoded._id
