@@ -1,10 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+
+
+import HomePage from './HomePage'
 
 function App() {
+  const [login, setLogin] = useState(false)
+  const [currentUser, setCurrentUser] = useState(false)
   return (
-<h1>HEloo</h1>
+
+    <>
+
+        <HomePage/>
+
+    </>
   );
 }
 

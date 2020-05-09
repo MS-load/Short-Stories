@@ -1,7 +1,7 @@
 let mongoose = require('mongoose')
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
-mongoose.connect("mongodb://localhost/data", options);
+mongoose.connect("mongodb://localhost/short_stories", options);
 
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
