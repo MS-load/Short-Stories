@@ -20,8 +20,19 @@ body {
     background-color: black;
 }
 
-.name {
+.nameBox {
     width: 80%;
+}
+
+.linkStyle {
+    text-decoration: none;
+}
+
+.name {
+ text-align: center;
+ margin-left: 9em;
+ color: white;
+ text-decoration: none;
 }
 
 .registration {
