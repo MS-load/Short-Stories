@@ -60,16 +60,20 @@ router.get('/author', async (req, res) => {
         console.log(error)
     }
 })
+
 //Update specific story
 router.put('/', (req, res) => {
-    const { id } = req.body
-    StoryModel.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
+    const { _id } = req.body
+    console.log('checkpoint 1')
+    console.log(req.body)
+    console.log(_id)
+    StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
         if (err) return res.status(500).send(err);
         return res.status(200).send(story)
     })
 })
 
-//Delete all Stories
+//Delete specific Story
 router.delete('/', async (req, res) => {
     const { _id } = req.body
     console.log(_id)

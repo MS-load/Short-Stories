@@ -5,7 +5,7 @@ import HomePage from './HomePage'
 
 function App() {
   const [login, setLogin] = useState(false)
-  const [currentUser, setCurrentUser] = useState('C')
+  const [currentUser, setCurrentUser] = useState('admin')
   return (
 
     <>

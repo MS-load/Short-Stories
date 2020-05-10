@@ -1,10 +1,10 @@
 import React from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
+import CenteredModal from './CenteredModal'
 
 export default class StoriesList extends React.Component {
     constructor(props) {
@@ -13,9 +13,11 @@ export default class StoriesList extends React.Component {
             storiesDisplay: [],
             stories: [],
             update: false,
-            showEditOptions: false
+            modal: false,
+            modalStory: {}
         }
         this.deleteStory = this.deleteStory.bind(this)
+        this.editStory = this.editStory.bind(this)
     }
 
     componentDidMount() {
@@ -35,16 +37,21 @@ export default class StoriesList extends React.Component {
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
                 console.log(res.data)
-                this.setState(prevState => ({
-                    update: !prevState.update
-                }))
+                this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
             })
     }
 
-    editStory() {
-
+    editStory(storyToEdit) {
+        console.log({ storyToEdit })
+        axios.put('http://localhost:5000/stories', storyToEdit)
+            .then(res => {
+                console.log(this.state)
+                this.setState({ update: !this.state.update })
+            }).catch(error => {
+                console.log(error)
+            })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -52,7 +59,6 @@ export default class StoriesList extends React.Component {
             console.log('UPDATED')
             axios.get(`http://localhost:5000/stories`)
                 .then(res => {
-                    // const storiesDisplay = res.data;
                     const stories = res.data.allStories;
                     this.setState({ stories });
                 }).catch(error => {
@@ -61,27 +67,9 @@ export default class StoriesList extends React.Component {
         }
     }
 
-    closeModal(){
-        this.setState({
-          showModal: false,
-        });
-    }
-    
-    openModal(){
-        this.setState({
-          showModal: true,
-        });
-    }
-    
-    saveSandbox(event){
-        console.log("Hello World");
-        name: this.refs.bundleName.value;
-        console.log(name);
-    }
-
     render() {
-        console.log(this.state.stories)
         return (
+            
             <Container sm={12} md={8} lg={6} className='mt-5' >
                 {this.state.stories.map(story =>
                     <Col md={6} className='bg-transparent' key={story._id}>
@@ -98,8 +86,7 @@ export default class StoriesList extends React.Component {
                                 >
                                     Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
-
-                                <Button variant="outline-primary" className="btn-sm" onClick={(e) => this.editStory(story)}
+                                <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
                                     style={{ visibility: this.props.currentUser === story.author || this.props.currentUser === 'admin' ? 'show' : 'hidden' }}
                                 >Edit</Button>
                             </Card.Footer>
@@ -107,9 +94,13 @@ export default class StoriesList extends React.Component {
                     </Col>
                 )
                 }
-                
+                <CenteredModal
+                    show={this.state.modal}
+                    onHide={() => this.setState({ modal: false })}
+                    story={this.state.modelStory}
+                    editStory={this.editStory}
+                />
             </Container>
         )
-    
     }
 }
