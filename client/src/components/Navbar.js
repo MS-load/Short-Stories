@@ -9,10 +9,10 @@ const Navbar = () => (
                 
             </div>
             <div className="registration">
-                <button>Register?</button>
+                <button className="button registerbutton">Register?</button>
             </div>
             <div className="login">
-                <button>Log in</button>
+                <button className="button loginbutton">Log in</button>
             </div>
         </header>
     </div>
