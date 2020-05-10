@@ -5,12 +5,12 @@ import HomePage from './HomePage'
 
 function App() {
   const [login, setLogin] = useState(false)
-  const [currentUser, setCurrentUser] = useState(false)
+  const [currentUser, setCurrentUser] = useState('C')
   return (
 
     <>
 
-        <HomePage/>
+        <HomePage currentUser={currentUser}/>
 
     </>
   );

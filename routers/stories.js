@@ -21,18 +21,18 @@ router.post('/', async (req, res) => {
 
 //Read all Stories
 router.get('/', async (req, res) => {
-    const { page = 1, limit = 3 } = req.query;
+    // const { page = 1, limit = 3 } = req.query;
     try {
         const allStories = await StoryModel.find()
             .sort('-createdAt')
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
+        // .limit(limit * 1)
+        // .skip((page - 1) * limit)
 
         const count = await StoryModel.countDocuments();
         res.json({
             allStories,
-            totalPages: Math.ceil(count / limit),
-            currentPage: page
+            // totalPages: Math.ceil(count / limit),
+            // currentPage: page
         })
     }
     catch (error) {
@@ -41,10 +41,10 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/author', async (req, res) => {
-    const {author='', page = 1, limit = 3 } = req.query;
-    const {} = req.body
+    const { author = '', page = 1, limit = 3 } = req.query;
+    const { } = req.body
     try {
-        const allStories = await StoryModel.find({author: author})
+        const allStories = await StoryModel.find({ author: author })
             .sort('-createdAt')
             .limit(limit * 1)
             .skip((page - 1) * limit)
@@ -70,15 +70,26 @@ router.put('/', (req, res) => {
 })
 
 //Delete all Stories
-router.delete('/', (req, res) => {
-    const { id } = req.body
-    StoryModel.findByIdAndRemove(id, { new: true, useFindAndModify: false }, (err, story) => {
-        if (err) return res.status(500).send(err);
+router.delete('/', async (req, res) => {
+    const { _id } = req.body
+    console.log(_id)
+    try {
+        const storyToDelete = await StoryModel.findByIdAndRemove(_id, { new: true, useFindAndModify: false })
+        console.log('checkpoint')
+        if (!storyToDelete) return res.status(500).send({
+            message: "nothing to delete",
+            id: _id
+        });
+
         return res.status(200).send({
             message: "successfully deleted",
-            id: id
+            id: _id
         })
-    })
+    }
+    catch (error) {
+        console.log(error)
+    }
+
 })
 
 module.exports = router;

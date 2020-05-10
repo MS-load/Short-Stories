@@ -2,13 +2,13 @@ POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
-    "title": "Hfsdfdsf1",
-    "body":"wordfsfdsfk 1",
-    "author":"GdsfdsfdsfRS"
+    "title": "Story 3",
+    "body":"body 3",
+    "author":"C"
 }
 
 ###
-GET http://localhost:5000/stories?page=1&limit=3
+GET http://localhost:5000/stories
 
 ###
 GET http://localhost:5000/stories/author?author=Dhas&page=1&limit=3
@@ -18,8 +18,8 @@ PUT http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "body":"Hello World Testing!",
-    "id": "5eb4720ea8dae0556cb7b7dd"
+    "body":"work 1",
+    "id": "5eb587fc0428ab590cbcea91"
 }
 
 ###
@@ -27,8 +27,7 @@ DELETE http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "body":"Hello World Testing!",
-    "id": "5eb441cf0dc3513ff4cfde39"
+    "_id": "5eb66a9e2cdfc82e380b807e"
 }
 
 
