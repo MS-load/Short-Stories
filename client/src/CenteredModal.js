@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 
+
 export default class CenteredModal extends React.Component {
     constructor(props) {
         super(props);
@@ -10,12 +11,22 @@ export default class CenteredModal extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        let values = {
-            title: document.querySelector('[name="storyTitle"]').value,
-            body: document.querySelector('[name="storyBody"]').value,
-            _id: this.props.story._id
+        let values
+        if (this.props.operation === 'edit') {
+            values = {
+                title: document.querySelector('[name="storyTitle"]').value,
+                body: document.querySelector('[name="storyBody"]').value,
+                _id: this.props.story._id
+            }
         }
-        this.props.editStory(values)
+        else {
+            values = {
+                title: document.querySelector('[name="storyTitle"]').value,
+                body: document.querySelector('[name="storyBody"]').value,
+                author: this.props.addAuthor
+            }
+        }
+        this.props.submitForm(values)
         this.props.onHide()
     }
 
@@ -31,7 +42,7 @@ export default class CenteredModal extends React.Component {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {(!this.props.story) ? "Add author" : `${this.props.story.author}`}
+                        {(!this.props.story) ? `${this.props.addAuthor}` : `${this.props.story.author}`}
 
                     </Modal.Title>
                 </Modal.Header>
@@ -44,7 +55,7 @@ export default class CenteredModal extends React.Component {
                                 name='storyTitle'
                                 type="text"
                                 placeholder="your title"
-                                defaultValue={(!this.props.story) ? "Add title" : `${this.props.story.title}`}
+                                defaultValue={(!this.props.story) ? '' : `${this.props.story.title}`}
 
                             />
                             <Form.Control.Feedback type="invalid">
@@ -53,11 +64,11 @@ export default class CenteredModal extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="storyBody">
                             <Form.Label>Story</Form.Label>
-                            <Form.Control
+                            <Form.Control as="textarea" rows="5"
                                 name='storyBody'
                                 required
                                 placeholder="your story"
-                                defaultValue={(!this.props.story) ? "Add story" : `${this.props.story.body}`}
+                                defaultValue={(!this.props.story) ? '' : `${this.props.story.body}`}
 
                             />
                             <Form.Control.Feedback type="invalid">

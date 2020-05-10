@@ -7,7 +7,7 @@ const router = express.Router()
 //Create a Story
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body)
+        console.log(req.body, 'here')
         const story = req.body
         const storyInfo = await new StoryModel(story)
         const storySave = await storyInfo.save()

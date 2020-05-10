@@ -2,7 +2,7 @@ POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
-    "title": "Story 5",
+    "title": "Story E",
     "body":"body 5",
     "author":"E"
 }
