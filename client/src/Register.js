@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import axios from 'axios'
+
 
 class Register extends Component {
   constructor() {
@@ -9,8 +9,7 @@ class Register extends Component {
       first_name: '',
       last_name: '',
       email: '',
-      password: '',
-      errors: {}
+      password: ''
     }
 
     this.onChange = this.onChange.bind(this)
@@ -22,7 +21,7 @@ class Register extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-
+    console.log('prevent')
     const newUser = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -30,12 +29,7 @@ class Register extends Component {
       password: this.state.password
     }
 
-    register(newUser).then(res => {
-      if (res) {
-        //this.props.history.push(`/login`)
-
-      }
-    })
+    register(newUser)
   }
   
 
@@ -44,7 +38,7 @@ class Register extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
-            <form noValidate onSubmit={this.onSubmit}>
+            <form noValidate onSubmit={(e) => this.onSubmit(e)}>
               <h1 className="h3 mb-3 font-weight-normal text-light">Register</h1>
               <div className="form-group">
                 <label htmlFor="name"  className=' text-light'>First name</label>
@@ -94,7 +88,7 @@ class Register extends Component {
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"
               >
-                Register!
+                Register
               </button>
             </form>
           </div>
