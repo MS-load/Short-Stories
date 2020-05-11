@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 
 import HomePage from './HomePage'
+import Register from './Register';
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -10,7 +11,8 @@ function App() {
 
     <>
 
-        <HomePage currentUser={currentUser}/>
+        {/* <HomePage currentUser={currentUser}/> */}
+        <Register currentUser={currentUser}/>
 
     </>
   );
