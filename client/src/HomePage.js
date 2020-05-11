@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import CenteredModal from './CenteredModal'
@@ -84,6 +85,7 @@ export default class StoriesList extends React.Component {
             <>
                 <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
                 <Container sm={12} md={8} lg={6} className='mt-5'>
+                <Row sm={1} md={2} lg={2}>
                     {this.state.stories.map(story =>
                         <Col md={6} className='bg-transparent' key={story._id}>
                             <Card className="text-center mt-2">
@@ -107,6 +109,7 @@ export default class StoriesList extends React.Component {
                         </Col>
                     )
                     }
+                    </Row>
                     <CenteredModal
                         show={this.state.modal}
                         onHide={() => this.setState({ modal: false })}
