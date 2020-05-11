@@ -1,0 +1,34 @@
+POST http://localhost:5000/stories
+Content-Type: application/json
+
+{   
+    "title": "Story E",
+    "body":"body 5",
+    "author":"E"
+}
+
+###
+GET http://localhost:5000/stories
+
+###
+GET http://localhost:5000/stories/author?author=Dhas&page=1&limit=3
+
+###
+PUT http://localhost:5000/stories
+Content-Type: application/json
+
+{
+    "body":"work 1",
+    "id": "5eb587fc0428ab590cbcea91"
+}
+
+###
+DELETE http://localhost:5000/stories
+Content-Type: application/json
+
+{
+    "_id": "5eb66a9e2cdfc82e380b807e"
+}
+
+
+
