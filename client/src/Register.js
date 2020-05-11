@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
+import axios from 'axios'
 
 class Register extends Component {
   constructor() {
@@ -33,6 +34,7 @@ class Register extends Component {
       //this.props.history.push(`/login`)
     })
   }
+  
 
   render() {
     return (
@@ -40,9 +42,9 @@ class Register extends Component {
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
             <form noValidate onSubmit={this.onSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal white">Register</h1>
+              <h1 className="h3 mb-3 font-weight-normal text-light">Register</h1>
               <div className="form-group">
-                <label htmlFor="name">First name</label>
+                <label htmlFor="name"  className=' text-light'>First name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -53,7 +55,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="name">Last name</label>
+                <label htmlFor="name"  className=' text-light'>Last name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -64,7 +66,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+                <label htmlFor="email"  className=' text-light'>Email address</label>
                 <input
                   type="email"
                   className="form-control"
@@ -75,7 +77,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password"  className=' text-light'>Password</label>
                 <input
                   type="password"
                   className="form-control"
