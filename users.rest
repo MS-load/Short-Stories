@@ -3,10 +3,10 @@ POST http://localhost:5000/users/register
 Content-Type: application/json
 
 {
-    "first_name": "Bob",
-    "last_name": "Dylan",
-    "email": "test@test.com",
-    "password": "test"
+    "first_name": "Aa",
+    "last_name": "aa",
+    "email": "aa@test.com",
+    "password": "aa"
 }
 
 ### 

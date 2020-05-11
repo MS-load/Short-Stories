@@ -11,6 +11,9 @@ export const register = newUser => {
     .then(res => {
       console.log('Registered')
     })
+    .catch(err => {
+      console.log(err)
+    })
 }
 
 export const login = user => {
@@ -31,7 +34,7 @@ export const login = user => {
 export const getProfile = user => {
   return axios
     .get('http://localhost:5000/users/profile', {
-      //headers: { Authorization: ` ${this.getToken()}` }
+      
     })
     .then(res => {
       console.log(res)
