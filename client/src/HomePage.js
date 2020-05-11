@@ -84,11 +84,11 @@ export default class StoriesList extends React.Component {
         return (
             <>
                 <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
-                <Container sm={12} md={12} lg={6} className='mt-5 card-columns'>
+                <Container className='mt-5 card-columns mt-0'>
                 {/* <Row sm={1} md={2} lg={2} className=""> */}
                     {this.state.stories.map(story =>
                         <div className='bg-transparent' key={story._id}>
-                            <Card className="text-center mt-2">
+                            <Card className="text-center mt-6">
                                 <Card.Header className="text-left">{story.author}</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{story.title}</Card.Title>
