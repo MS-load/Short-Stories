@@ -84,10 +84,10 @@ export default class StoriesList extends React.Component {
         return (
             <>
                 <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
-                <Container sm={12} md={8} lg={6} className='mt-5'>
-                <Row sm={1} md={2} lg={2}>
+                <Container className='mt-5 d-flex flex-wrap bd-highlight example-parent'>
+                <div className="">
                     {this.state.stories.map(story =>
-                        <Col md={6} className='bg-transparent' key={story._id}>
+                        <div className='p-2 bd-highlight col-example' key={story._id}>
                             <Card className="text-center mt-2">
                                 <Card.Header className="text-left">{story.author}</Card.Header>
                                 <Card.Body>
@@ -98,18 +98,17 @@ export default class StoriesList extends React.Component {
                                 <Card.Footer className="text-muted d-flex justify-content-between">
                                     <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story)}
                                         style={{ visibility: this.props.currentUser === story.author || this.props.currentUser === 'admin' ? 'show' : 'hidden' }}
-                                    >
-                                        Delete</Button>
+                                    >Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
                                     <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
                                         style={{ visibility: this.props.currentUser === story.author || this.props.currentUser === 'admin' ? 'show' : 'hidden' }}
                                     >Edit</Button>
                                 </Card.Footer>
                             </Card>
-                        </Col>
+                        </div>
                     )
                     }
-                    </Row>
+                    </div>
                     <CenteredModal
                         show={this.state.modal}
                         onHide={() => this.setState({ modal: false })}

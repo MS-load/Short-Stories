@@ -22,13 +22,13 @@ export default class Navigation extends React.Component {
           <Nav className="mr-auto">
 
             <Nav.Link onClick={() => this.setState({ modal: true})}
-            style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden' }}>
+            style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden', color: '#1e14de'  }}>
             Add a story </Nav.Link>
-            <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
+            <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden', color: '#1e14de'  }}>My Stories</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link>Login</Nav.Link>
-            <Nav.Link >Register</Nav.Link>
+            <Nav.Link style={{ color: '#1e14de' }}>Login</Nav.Link>
+            <Nav.Link style={{ color: '#1e14de' }}>Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <CenteredModal

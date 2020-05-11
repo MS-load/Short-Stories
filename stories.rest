@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {   
     "title": "Story E",
-    "body":"body 5",
+    "body":" Body 5 ",
     "author":"E"
 }
 
@@ -18,8 +18,8 @@ PUT http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "body":"work 1",
-    "id": "5eb587fc0428ab590cbcea91"
+    "body":"Work 1",
+    "id": "5eb907be9b27e32354a5750a"
 }
 
 ###
@@ -27,7 +27,7 @@ DELETE http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "_id": "5eb66a9e2cdfc82e380b807e"
+    "_id": "5eb907be9b27e32354a5750a"
 }
 
 
