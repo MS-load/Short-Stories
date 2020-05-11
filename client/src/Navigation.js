@@ -27,8 +27,8 @@ export default class Navigation extends React.Component {
             <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden', color: '#1e14de'  }}>My Stories</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link style={{ color: '#1e14de' }}>Login</Nav.Link>
-            <Nav.Link style={{ color: '#1e14de' }}>Register</Nav.Link>
+            <Nav.Link style={{ color: '#ffffff' }}>Login</Nav.Link>
+            <Nav.Link style={{ color: '#ffffff' }}>Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <CenteredModal

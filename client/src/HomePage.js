@@ -84,10 +84,10 @@ export default class StoriesList extends React.Component {
         return (
             <>
                 <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
-                <Container className='mt-5 d-flex flex-wrap bd-highlight example-parent'>
-                <div className="">
+                <Container sm={12} md={12} lg={6} className='mt-5 card-columns'>
+                {/* <Row sm={1} md={2} lg={2} className=""> */}
                     {this.state.stories.map(story =>
-                        <div className='p-2 bd-highlight col-example' key={story._id}>
+                        <div className='bg-transparent' key={story._id}>
                             <Card className="text-center mt-2">
                                 <Card.Header className="text-left">{story.author}</Card.Header>
                                 <Card.Body>
@@ -108,7 +108,7 @@ export default class StoriesList extends React.Component {
                         </div>
                     )
                     }
-                    </div>
+                    {/* </Row> */}
                     <CenteredModal
                         show={this.state.modal}
                         onHide={() => this.setState({ modal: false })}
