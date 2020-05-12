@@ -61,13 +61,13 @@ users.post('/login', (req, res) => {
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.send(token)
+            res.send(user._id)
             // Passwords is not matching
           } else {
-            res.json({ error: 'User does not exist' })
+            res.send({ error: 'User does not exist' })
           }
         } else {
-          res.json({ error: 'User does not exist' })
+          res.send({ error: 'User does not exist' })
         }
       })
       .catch(err => {

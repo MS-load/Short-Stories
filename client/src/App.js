@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomePage from './HomePage'
 import Register from './Register';
 import Login from './Login'
+//import Profile from './Profile'
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -13,19 +14,14 @@ function App() {
 
     
 
-        {/* <HomePage currentUser={currentUser}/> */}
-        // // <BrowserRouter>
-        // //   <div className='App'>
-        // //     <Navigation />
-        // //     <Switch />
+        <Login currentUser={currentUser}/>
+        // <BrowserRouter>
+        //   <div className="App">
 
-        // //       <Route exact path="/register" component={Register} />
-        // //       <Route exact path="/login" component={Login} />
-        // //       {/* <Route exact path="/profile" component={Profile} /> */}
-        // //     <Switch />
-        // //   </div>
+        //   </div>
 
-        // // <BrowserRouter/>
+
+        // </BrowserRouter>
 
     
   );

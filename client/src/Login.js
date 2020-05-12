@@ -24,9 +24,13 @@ class Login extends Component {
             password: this.state.password
         }
         login(user).then(res => {
-            if (res) {
+            if (res.error) {
+                console.log(res)
+            } else {
                 //this.props.history.push('/profile')
+                
             }
+
         })
     }
 
