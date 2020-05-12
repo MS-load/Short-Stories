@@ -1,10 +1,10 @@
 import React from 'react';
-import Login from './Login'
-import Register from './Register'
 import { UserProvider } from './Context/userContext';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {Route, Switch } from 'react-router-dom'
 
 import HomePage from './HomePage'
+import Register from './Register';
+import Login from './Login'
 
 function App() {
 

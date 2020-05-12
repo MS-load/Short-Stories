@@ -3,6 +3,8 @@ import {Link } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import CenteredModal from './CenteredModal'
+import Login from './Login'
+import Register from './Register'
 
 
 export default class Navigation extends React.Component {
