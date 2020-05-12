@@ -84,8 +84,7 @@ export default class StoriesList extends React.Component {
         return (
             <>
                 <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
-                <Container className='mt-5 card-columns mt-0'>
-                {/* <Row sm={1} md={2} lg={2} className=""> */}
+                <Container className='mt-5 card-columns'>
                     {this.state.stories.map(story =>
                         <div className='bg-transparent' key={story._id}>
                             <Card className="text-center mt-6">
@@ -108,7 +107,6 @@ export default class StoriesList extends React.Component {
                         </div>
                     )
                     }
-                    {/* </Row> */}
                     <CenteredModal
                         show={this.state.modal}
                         onHide={() => this.setState({ modal: false })}
