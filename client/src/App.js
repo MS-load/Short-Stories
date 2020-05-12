@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
-
+import React, { useState } from 'react';
+import { UserProvider } from './Context/userContext'
 
 import HomePage from './HomePage'
 
 function App() {
-  const [login, setLogin] = useState(false)
-  const [currentUser, setCurrentUser] = useState('guest')
+  const user = { name: 'D', loggedIn: true }
+  // const [login, setLogin] = useState(false)
+  // const [currentUser, setCurrentUser] = useState('guest')
   return (
+    <UserProvider value={user}>
+      <HomePage />
+    </UserProvider>
 
-    <>
-
-        <HomePage currentUser={currentUser}/>
-
-    </>
   );
 }
 

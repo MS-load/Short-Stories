@@ -1,8 +1,9 @@
-import React, {createContext} from 'react';
+import React from 'react'
 
-const userContext = createContext({user: {}}); // Create a context object
+const UserContext = React.createContext({})
 
-export {
-  userContext // Export it so it can be used by other Components
-};
+export const UserProvider = UserContext.Provider
+export const UserConsumer = UserContext.Consumer
+
+export default UserContext
 

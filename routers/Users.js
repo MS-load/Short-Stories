@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt')
 
 const User = require('../models/User')
 
-
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
@@ -35,6 +34,7 @@ users.post('/register', (req, res) => {
             })
         })
       } else {
+        console.log('check')
         res.json({ error: 'User already exists' })
       }
     })
@@ -60,6 +60,7 @@ users.post('/login', (req, res) => {
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
+            console.log(token)//why ? 
             res.send(token)
             // Passwords is not matching
           } else {
