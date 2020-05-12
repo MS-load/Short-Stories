@@ -49,7 +49,7 @@ users.post('/login', (req, res) => {
     })
       .then(user => {
         if (user) {
-            // Passwords is matching
+           // Passwords is matching
           if (bcrypt.compareSync(req.body.password, user.password)) {
             const payload = {
               _id: user._id,
@@ -60,13 +60,14 @@ users.post('/login', (req, res) => {
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.send(user._id)
-            // Passwords is not matching
-          } else {
-            res.send({ error: 'User does not exist' })
+            res.status(200).send(user._id)          
+          } 
+          // Passwords is not matching
+          else {
+            res.status(401).send('User does not exist')
           }
         } else {
-          res.send({ error: 'User does not exist' })
+          res.status(401).send('User does not exist')
         }
       })
       .catch(err => {
