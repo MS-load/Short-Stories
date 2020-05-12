@@ -35,9 +35,9 @@ export default class Login extends React.Component {
                 console.log(res)
                 const { id, name } = res.data
                 
-                console.log(name)
+                console.log(name, id)
                 if (res.statusText === 'OK') {
-                    props.setUser({name})
+                    props.setUser({name, id})
                 }
             }).then(()=>{
                 this.setState({authorized: true})

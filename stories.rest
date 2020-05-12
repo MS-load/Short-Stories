@@ -2,9 +2,9 @@ POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
-    "title": "Story E",
-    "body":"body 5",
-    "author":"E"
+    "title": "Story A",
+    "body":"body A",
+    "userId": "5ebae15e4810562480e6baf6"
 }
 
 ###

@@ -12,8 +12,7 @@ users.post('/register', (req, res) => {
   console.log(req)
   const today = new Date()
   const userData = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    user_name: req.body.user_name,
     email: req.body.email,
     password: req.body.password,
     created: today
@@ -55,14 +54,13 @@ users.post('/login', (req, res) => {
           if (bcrypt.compareSync(req.body.password, user.password)) {
             const payload = {
               _id: user._id,
-              first_name: user.first_name,
-              last_name: user.last_name,
+              user_name: user.user_name,
               email: user.email
             }
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            const userDetails = {id: user._id, name:`${user.first_name} ${user.last_name}`}
+            const userDetails = {id: user._id, name:`${user.user_name}`}
             res.status(200).send(userDetails)          
           } 
           // Passwords is not matching

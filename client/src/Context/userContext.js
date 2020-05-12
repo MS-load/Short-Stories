@@ -4,12 +4,12 @@ const UserContext = React.createContext()
 class UserProvider extends React.Component {
     // Context state
     state = {
-        user: {name:'D'},
+        user: { id: '5ebae15e4810562480e6baf6' },
     }
 
     // Method to update state
-    setUser = user  => {
-        this.setState(prevState => ({ user }))
+    setUser = userId => {
+        this.setState(prevState => ({ userId }))
     }
 
     render() {
@@ -32,7 +32,7 @@ class UserProvider extends React.Component {
 
 const UserConsumer = UserContext.Consumer
 
-export {UserProvider, UserConsumer}
+export { UserProvider, UserConsumer }
 // export const UserProvider = UserContext.Provider
 
 

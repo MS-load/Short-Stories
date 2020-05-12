@@ -3,10 +3,9 @@ POST http://localhost:5000/users/register
 Content-Type: application/json
 
 {
-    "first_name": "Bbcc",
-    "last_name": "bb",
-    "email": "bbcc@test.com",
-    "password": "bb"
+    "user_name": "E",
+    "email": "ee@test.com",
+    "password": "ee"
 }
 
 ### 

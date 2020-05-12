@@ -37,8 +37,8 @@ export default class Navigation extends React.Component {
         <CenteredModal
           show={this.state.modal}
           onHide={() => this.setState({ modal: false })}
-          addAuthor={this.props.currentUser}
           submitForm={this.props.addStory}
+          userId={this.props.currentUser}
           operation='add'
         />
       </Navbar>

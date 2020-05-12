@@ -23,7 +23,7 @@ export default class CenteredModal extends React.Component {
             values = {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
-                author: this.props.addAuthor
+                userId: this.props.userId
             }
         }
         this.props.submitForm(values)
@@ -43,7 +43,7 @@ export default class CenteredModal extends React.Component {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {(!this.props.story) ? `${this.props.addAuthor}` : `${this.props.story.author}`}
+                        {(!this.props.story) ? `Your new story` : `${this.props.story.author}`}
 
                     </Modal.Title>
                 </Modal.Header>
