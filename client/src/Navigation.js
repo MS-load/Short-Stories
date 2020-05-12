@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import CenteredModal from './CenteredModal'
+import Login from './Login'
+import Register from './Register'
 
 
 export default class Navigation extends React.Component {
@@ -27,8 +29,8 @@ export default class Navigation extends React.Component {
             <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link>Login</Nav.Link>
-            <Nav.Link >Register</Nav.Link>
+            <Nav.Link >Login</Nav.Link>
+            <Nav.Link to="http://localhost:5000/users/register" >Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <CenteredModal
