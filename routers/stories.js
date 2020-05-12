@@ -1,7 +1,5 @@
 const express = require('express')
 const StoryModel = require('../models/storiesModel')
-
-
 const router = express.Router()
 
 //Create a Story
