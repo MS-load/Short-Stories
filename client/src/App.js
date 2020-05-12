@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { UserProvider } from './Context/userContext'
+import React from 'react';
+import Login from './Login'
+import Register from './Register'
+import { UserProvider } from './Context/userContext';
+import { Route, Switch } from 'react-router-dom'
 
 import HomePage from './HomePage'
 
 function App() {
-  const user = { name: 'D', loggedIn: true }
-  // const [login, setLogin] = useState(false)
-  // const [currentUser, setCurrentUser] = useState('guest')
-  return (
-    <UserProvider value={user}>
-      <HomePage />
-    </UserProvider>
 
+  return (
+    <UserProvider>
+      <Switch>
+        <Route path="/Login" component={Login} />
+        <Route path="/Register" component={Register} />
+        <Route path="/" component={HomePage} basename="/Home" />
+      </Switch>
+    </UserProvider>
   );
 }
 

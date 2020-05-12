@@ -20,5 +20,3 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/users/profile
-"Content-Type": "application/json",
-"Authorization": `Bearer ${eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWI3YTMwOTJlZmYwNTM5M2NlMzg5NDYiLCJmaXJzdF9uYW1lIjoiQm9iIiwibGFzdF9uYW1lIjoiRHlsYW4iLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE1ODkyMjUxNjIsImV4cCI6MTU4OTIyNjYwMn0.adBlCLCSIJoFE0N7-t6orr76WDYg4_UOCtsxjLs7yw8}`

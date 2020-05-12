@@ -8,7 +8,7 @@ import ErrorBoundary from './errorBoundary';
 
 
 ReactDOM.render(
-    (<BrowserRouter>
+    (<BrowserRouter basename="/short_stories">
         <ErrorBoundary>
 
             <App />
