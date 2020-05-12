@@ -2,7 +2,6 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import { UserConsumer } from './Context/userContext'
 import { Redirect } from 'react-router-dom'
-import { login } from './UserFunctions'
 import axios from 'axios'
 import ErrorMessage from './errorMessage'
 
@@ -26,34 +25,27 @@ export default class Login extends React.Component {
 
     }
 
-    // onSubmit(e) {
-    //     e.preventDefault()
-
-    //     
-    //     login(user).then(res => {
-    //         if (res.error) {
-    //             console.log(res)
-    //         } else {
-    //             //this.props.history.push('/profile')
-
-    //         }
-
-    //     })
-    // }
-
-    resolveAfter2Seconds(props) {
+    verifyLogin(props) {
         const user = {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post('http://localhost:5000/users/login', { user })
+        axios.post('http://localhost:5000/users/login', user)
             .then(res => {
-                return res
+                console.log(res)
+                const { id, name } = res.data
+                
+                console.log(name)
+                if (res.statusText === 'OK') {
+                    props.setUser({name})
+                }
+            }).then(()=>{
+                this.setState({authorized: true})
             })
             .catch(err => {
-                this.setState({error: true})
+                this.setState({ error: true })
                 console.log(err.response)
-                this.setState({errorMessage: `${err.response.data}`})
+                this.setState({ errorMessage: `${err.response.data}` })
             })
     }
 
@@ -62,8 +54,9 @@ export default class Login extends React.Component {
     async redirectToHome(props, e) {
         e.preventDefault()
         console.log('checkpoint')
-        const result = await this.resolveAfter2Seconds(props)
-        console.log(result, 'check')
+        const result = await this.verifyLogin(props)
+
+        //if(result) return console.log('result:')
         // if (res.status === 'ok') {
         //     this.setState({ authorized: true })
         //     console.log(this.state.authorized)
@@ -75,7 +68,6 @@ export default class Login extends React.Component {
             (!this.state.authorized) ?
                 (<UserConsumer>
                     {props => {
-                        console.log(props)
                         return <div>
                             <div className='container'>
                                 <form noValidate onSubmit={(e) => this.redirectToHome(props, e)}>
@@ -112,7 +104,7 @@ export default class Login extends React.Component {
                     </button>
                                 </form>
                             </div>
-                            <ErrorMessage onClose={() => this.setState({error: false})} show={this.state.error} text={this.state.errorMessage}/>
+                            <ErrorMessage onClose={() => this.setState({ error: false })} show={this.state.error} text={this.state.errorMessage} />
                         </div>
                     }}
                 </UserConsumer>

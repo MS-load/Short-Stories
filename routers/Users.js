@@ -9,6 +9,7 @@ const User = require('../models/User')
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
+  console.log(req)
   const today = new Date()
   const userData = {
     first_name: req.body.first_name,
@@ -44,6 +45,7 @@ users.post('/register', (req, res) => {
 })
 
 users.post('/login', (req, res) => {
+  console.log(req.body)
     User.findOne({
       email: req.body.email
     })
@@ -60,11 +62,12 @@ users.post('/login', (req, res) => {
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.status(200).send(user._id)          
+            const userDetails = {id: user._id, name:`${user.first_name} ${user.last_name}`}
+            res.status(200).send(userDetails)          
           } 
           // Passwords is not matching
           else {
-            res.status(401).send('User does not exist')
+            res.status(401).send('Incorrect Password')
           }
         } else {
           res.status(401).send('User does not exist')
