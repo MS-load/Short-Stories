@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import CenteredModal from './CenteredModal'
+import Login from './Login'
+import Register from './Register'
 
 
 export default class Navigation extends React.Component {
@@ -22,13 +24,13 @@ export default class Navigation extends React.Component {
           <Nav className="mr-auto">
 
             <Nav.Link onClick={() => this.setState({ modal: true})}
-            style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden', color: '#1e14de'  }}>
+            style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden' }}>
             Add a story </Nav.Link>
-            <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden', color: '#1e14de'  }}>My Stories</Nav.Link>
+            <Nav.Link  style={{ visibility: this.props.currentUser !== 'guest' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link style={{ color: '#ffffff' }}>Login</Nav.Link>
-            <Nav.Link style={{ color: '#ffffff' }}>Register</Nav.Link>
+            <Nav.Link >Login</Nav.Link>
+            <Nav.Link to="http://localhost:5000/users/register" >Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <CenteredModal
@@ -39,6 +41,7 @@ export default class Navigation extends React.Component {
           operation='add'
         />
       </Navbar>
+
     );
   }
 }
