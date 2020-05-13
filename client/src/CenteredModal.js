@@ -43,7 +43,6 @@ export default class CenteredModal extends React.Component {
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         {(!this.props.story) ? `${this.props.addAuthor}` : `${this.props.story.author}`}
-
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

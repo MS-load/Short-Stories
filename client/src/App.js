@@ -11,10 +11,8 @@ function App() {
   const [login, setLogin] = useState(false)
   const [currentUser, setCurrentUser] = useState('guest')
   return (
-
-    
-
-        <Login currentUser={currentUser}/>
+      <HomePage />
+        // <Login currentUser={currentUser}/>
         // <BrowserRouter>
         //   <div className="App">
 
