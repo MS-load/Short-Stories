@@ -3,19 +3,29 @@ const StoryModel = require('../models/storiesModel')
 const UserModel = require('../models/userModel')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
+const jwt_decode = require('jwt-decode')
 
 //Create a Story
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body, 'here')
         const story = req.body
-        const author = await UserModel.findById(story.userId)
-        console.log(story.userId)
-        story.author = author.user_name
-        const storyInfo = await new StoryModel(story)
-        const storySave = await storyInfo.save()
-        console.log(storySave)
-        return res.status(200).send(JSON.stringify(storySave))
+        if (story.token == null) return res.sendStatus(401)
+        jwt.verify(story.token, 'secret', async (err, user) => {
+            try {
+                if (err) return res.sendStatus(403)
+                const decoded = await jwt_decode(story.token)
+                delete story.token                
+                story.author = decoded.user_name
+                story.userId = decoded._id
+                const storyInfo = await new StoryModel(story)
+                const storySave = await storyInfo.save()
+                return res.status(200).send({ message: 'Story added' })
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        })
     }
     catch (error) {
         console.log(error);

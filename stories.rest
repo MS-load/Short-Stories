@@ -2,9 +2,9 @@ POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
-    "title": "Story A",
-    "body":"body A",
-    "userId": "5ebae15e4810562480e6baf6"
+    "title": "Story C",
+    "body":"body c",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiZW1haWwiOiJhYUB0ZXN0LmNvbSIsImlhdCI6MTU4OTM4OTY4NiwiZXhwIjoxNTg5NDc2MDg2fQ.ab4tF4UORaqYJWO-0Firia_R8zkASYKtHeaNUSkXdPE"
 }
 
 ###
