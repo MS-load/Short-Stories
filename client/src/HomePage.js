@@ -86,7 +86,7 @@ export default class StoriesList extends React.Component {
                 {props => {
                     console.log(props)
                     return <div>
-                        <Navbar currentUser={props.user.id} addStory={this.addStory} />
+                        <Navbar addStory={this.addStory} />
                         <Container sm={12} md={8} lg={6} className='mt-5'>
                             {this.state.stories.map(story =>
                                 <Col md={6} className='bg-transparent' key={story._id}>
@@ -99,12 +99,12 @@ export default class StoriesList extends React.Component {
                                         </Card.Body>
                                         <Card.Footer className="text-muted d-flex justify-content-between p-2">
                                             <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story)}
-                                                style={{ visibility: props.user.id === story.userId || props.user.id === 'admin' ? 'show' : 'hidden' }}
+                                                style={{ visibility: props.user.id === story.userId || props.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >
                                                 Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
                                             <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
-                                                style={{ visibility: props.user.id === story.userId || props.user.id === 'admin' ? 'show' : 'hidden' }}
+                                                style={{ visibility: props.user.id === story.userId || props.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >Edit</Button>
                                         </Card.Footer>
                                     </Card>

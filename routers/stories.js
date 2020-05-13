@@ -1,6 +1,6 @@
 const express = require('express')
 const StoryModel = require('../models/storiesModel')
-const UserModel = require('../models/User')
+const UserModel = require('../models/userModel')
 const router = express.Router()
 
 //Create a Story
@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
         console.log(req.body, 'here')
         const story = req.body
         const author = await UserModel.findById(story.userId)
+        console.log(story.userId)
         story.author = author.user_name
         const storyInfo = await new StoryModel(story)
         const storySave = await storyInfo.save()

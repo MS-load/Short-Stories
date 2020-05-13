@@ -4,7 +4,7 @@ const UserContext = React.createContext()
 class UserProvider extends React.Component {
     // Context state
     state = {
-        user: { id: '5ebae15e4810562480e6baf6' },
+        user: { id: '5ebae15e4810562480e6baf6', isAdmin : false },
     }
 
     // Method to update state

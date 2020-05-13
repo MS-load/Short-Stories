@@ -4,7 +4,7 @@ const users = express.Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-const User = require('../models/User')
+const User = require('../models/userModel')
 
 process.env.SECRET_KEY = 'secret'
 
@@ -15,6 +15,7 @@ users.post('/register', (req, res) => {
     user_name: req.body.user_name,
     email: req.body.email,
     password: req.body.password,
+    isAdmin: false,
     created: today
   }
 
@@ -60,7 +61,7 @@ users.post('/login', (req, res) => {
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            const userDetails = {id: user._id, name:`${user.user_name}`}
+            const userDetails = {id: user._id, isAdmin: user.isAdmin}
             res.status(200).send(userDetails)          
           } 
           // Passwords is not matching
@@ -76,22 +77,5 @@ users.post('/login', (req, res) => {
       })
   })
 
-  users.get('/profile', (req, res) => {
-    const decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-  
-    User.findOne({
-      _id: decoded._id
-    })
-      .then(user => {
-        if (user) {
-          res.json(user)
-        } else {
-          res.send('User does not exist')
-        }
-      })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
-  })
 
 module.exports = users
