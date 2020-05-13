@@ -41,3 +41,19 @@ body {
 ::-webkit-scrollbar-thumb:window-inactive {
 background: #88BDBC;
 }
+
+@media (min-width: 35em) {
+  .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media (min-width: 62em) {
+  .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+  }
+}
