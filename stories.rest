@@ -9,6 +9,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/stories
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiZW1haWwiOiJhYUB0ZXN0LmNvbSIsImlhdCI6MTU4OTM4OTY4NiwiZXhwIjoxNTg5NDc2MDg2fQ.ab4tF4UORaqYJWO-0Firia_R8zkASYKtHeaNUSkXdPE
 
 ###
 GET http://localhost:5000/stories/author?author=Dhas&page=1&limit=3
@@ -19,7 +20,8 @@ Content-Type: application/json
 
 {
     "body":"work 1",
-    "id": "5eb587fc0428ab590cbcea91"
+    "id": "5eb587fc0428ab590cbcea91",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiZW1haWwiOiJhYUB0ZXN0LmNvbSIsImlhdCI6MTU4OTM4OTY4NiwiZXhwIjoxNTg5NDc2MDg2fQ.ab4tF4UORaqYJWO-0Firia_R8zkASYKtHeaNUSkXdPE"
 }
 
 ###

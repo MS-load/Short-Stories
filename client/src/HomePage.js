@@ -84,7 +84,6 @@ export default class StoriesList extends React.Component {
         return (
             <UserConsumer>
                 {props => {
-                    console.log(props)
                     return <div>
                         <Navbar addStory={this.addStory} />
                         <Container sm={12} md={8} lg={6} className='mt-5'>

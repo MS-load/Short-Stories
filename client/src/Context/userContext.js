@@ -1,10 +1,11 @@
 import React from 'react'
 
+
 const UserContext = React.createContext()
 class UserProvider extends React.Component {
     // Context state
     state = {
-        user: { id: '5ebae15e4810562480e6baf6', isAdmin : false },
+        user: { id: '', isAdmin: false , token: '' },
     }
 
     // Method to update state

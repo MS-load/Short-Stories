@@ -33,11 +33,11 @@ export default class Login extends React.Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 console.log(res)
-                const { id, name } = res.data
+                const { id, name, token } = res.data
                 
                 console.log(name, id)
                 if (res.statusText === 'OK') {
-                    props.setUser({name, id})
+                    props.setUser({name, id, token})
                 }
             }).then(()=>{
                 this.setState({authorized: true})
@@ -75,7 +75,7 @@ export default class Login extends React.Component {
                                     <div className='form-group'>
 
 
-                                        <label htmlFor='email' className='text-light'>Email adress</label>
+                                        <label htmlFor='email' className='text-light'>Email address</label>
                                         <input
                                             type='email'
                                             className='form-control'

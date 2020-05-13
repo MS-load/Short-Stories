@@ -2,6 +2,7 @@ const express = require('express')
 const StoryModel = require('../models/storiesModel')
 const UserModel = require('../models/userModel')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
 
 //Create a Story
 router.post('/', async (req, res) => {
@@ -20,6 +21,18 @@ router.post('/', async (req, res) => {
         console.log(error);
     }
 })
+
+// function authenticateToken(req, res, next) {
+//     const authHeader = req.headers['authorization']
+//     const token = authHeader && authHeader.split(' ')[1]
+//     if (token == null) return res.sendStatus(401)
+
+//     jwt.verify(token, 'secret', (err, user) => {
+//         if (err) return res.sendStatus(403)
+//         req.user = user
+//         next()
+//     })
+// }
 
 //Read all Stories
 router.get('/', async (req, res) => {
@@ -63,16 +76,25 @@ router.get('/author', async (req, res) => {
     }
 })
 
+
 //Update specific story
 router.put('/', (req, res) => {
-    const { _id } = req.body
-    console.log('checkpoint 1')
-    console.log(req.body)
-    console.log(_id)
-    StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
-        if (err) return res.status(500).send(err);
-        return res.status(200).send(story)
+    const refreshToken = req.body.token
+    if (refreshToken == null) return res.sendStatus(401)
+    //if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+    jwt.verify(refreshToken, 'secret', (err, user) => {
+        if (err) return res.sendStatus(403)
+        res.json({ message: "done" })
     })
+
+    // const { _id } = req.body
+    // console.log('checkpoint 1')
+    // console.log(req.body)
+    // console.log(_id)
+    // StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
+    //     if (err) return res.status(500).send(err);
+    //     return res.status(200).send(story)
+    // })
 })
 
 //Delete specific Story

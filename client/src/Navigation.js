@@ -28,9 +28,9 @@ export default class Navigation extends React.Component {
                 <Nav className="mr-auto">
 
                   <Nav.Link onClick={() => this.setState({ modal: true })}
-                    style={{ visibility: props.user.id !== 'guest' ? 'show' : 'hidden' }}>
+                    style={{ visibility: props.user.token === '' ? 'show' : 'hidden' }}>
                     Add a story </Nav.Link>
-                  <Nav.Link style={{ visibility: props.user.id !== 'guest' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
+                  <Nav.Link style={{ visibility: props.user.token === '' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
                 </Nav>
                 <Nav>
                   <Link to='/Login'>Login</Link>

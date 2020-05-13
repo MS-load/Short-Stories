@@ -2,6 +2,7 @@ const express = require('express')
 const users = express.Router()
 
 const jwt = require('jsonwebtoken')
+const jwy_decode = require('jwt-decode')
 const bcrypt = require('bcrypt')
 
 const User = require('../models/userModel')
@@ -59,9 +60,9 @@ users.post('/login', (req, res) => {
               email: user.email
             }
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
-              expiresIn: 1440
+              expiresIn: '24h'
             })
-            const userDetails = {id: user._id, isAdmin: user.isAdmin}
+            const userDetails = {id: user._id, isAdmin: user.isAdmin, token: token}
             res.status(200).send(userDetails)          
           } 
           // Passwords is not matching
