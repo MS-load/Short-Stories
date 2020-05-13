@@ -57,6 +57,7 @@ users.post('/login', (req, res) => {
             const payload = {
               _id: user._id,
               user_name: user.user_name,
+              isAdmin: user.isAdmin,
               email: user.email
             }
             let token = jwt.sign(payload, process.env.SECRET_KEY, {

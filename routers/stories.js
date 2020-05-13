@@ -32,6 +32,48 @@ router.post('/', async (req, res) => {
     }
 })
 
+//Delete specific Story
+router.delete('/', async (req, res) => {
+    try {
+        const { _id, token } = req.body
+        if (token == null) return res.sendStatus(401)
+        jwt.verify(token, 'secret', async (err, user) => {
+            try{
+                const decoded = await jwt_decode(token)
+                const storyToDelete = await StoryModel.findOne({
+                    _id: _id
+                  })
+                if (!storyToDelete) return res.status(500).send({
+                    message: "Unknown story",
+                    id: _id
+                });
+
+                const delAuthorized = decoded.isAdmin || (decoded._id == storyToDelete.userId)
+                if(!delAuthorized) return res.status(401).send({
+                    message: "Delete unauthorized",
+                    id: _id
+                });
+                await StoryModel.findByIdAndRemove(_id, { new: true, useFindAndModify: false })
+                return res.status(200).send({
+                    message: "Delete successful",
+                })
+            }catch(error){
+                console.log(error)
+            }
+        })
+
+        
+        
+        
+
+        
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+})
+
 // function authenticateToken(req, res, next) {
 //     const authHeader = req.headers['authorization']
 //     const token = authHeader && authHeader.split(' ')[1]
@@ -107,27 +149,6 @@ router.put('/', (req, res) => {
     // })
 })
 
-//Delete specific Story
-router.delete('/', async (req, res) => {
-    const { _id } = req.body
-    console.log(_id)
-    try {
-        const storyToDelete = await StoryModel.findByIdAndRemove(_id, { new: true, useFindAndModify: false })
-        console.log('checkpoint')
-        if (!storyToDelete) return res.status(500).send({
-            message: "nothing to delete",
-            id: _id
-        });
 
-        return res.status(200).send({
-            message: "successfully deleted",
-            id: _id
-        })
-    }
-    catch (error) {
-        console.log(error)
-    }
-
-})
 
 module.exports = router;

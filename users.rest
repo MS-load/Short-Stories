@@ -16,6 +16,13 @@ Content-Type: application/json
     "email": "aa@test.com",
     "password": "aa" 
 }
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
 
+{
+    "email": "admin@root.com",
+    "password": "admin123" 
+}
 ###
 GET http://localhost:5000/users/profile
