@@ -35,30 +35,24 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    logout() {
-        let value = this.context 
-        console.log(value.token)
-        // axios.post('http://localhost:5000/users/logout', currentUser.user.token)
-        //     .then(res => {
-        //         console.log(res)
-        //         currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
-        //     }).catch(error => {
-        //         console.log(error)
-        //     })
-    }
+    // logout() {
+    //     let value = this.context 
+    //     console.log(value.token)
+    //     // axios.post('http://localhost:5000/users/logout', currentUser.user.token)
+    //     //     .then(res => {
+    //     //         console.log(res)
+    //     //         currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
+    //     //     }).catch(error => {
+    //     //         console.log(error)
+    //     //     })
+    // }
 
     deleteStory(storyToDelete, currentUser) {
         console.log(storyToDelete)
         storyToDelete.token = currentUser.user.token
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
-                // if (res.data.error) {
-                   
-                // }
-this.logout()
                 this.setState({ update: !this.state.update })
-
-
             }).catch(error => {
                 console.log(error)
 
@@ -67,12 +61,9 @@ this.logout()
 
     editStory(storyToEdit, currentUser) {
         console.log({ storyToEdit })
+     //   console.log(storyToEdit)
         axios.put('http://localhost:5000/stories', storyToEdit)
             .then(res => {
-                if (res.data.error) {
-                    return this.logout(currentUser.user.token)
-                }
-
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
@@ -85,9 +76,6 @@ this.logout()
         axios.post('http://localhost:5000/stories', storyToAdd)
             .then(res => {
                 console.log(res)
-                if (res.data.error) {
-                    return this.logout(storyToAdd.token)
-                }
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
@@ -145,7 +133,7 @@ this.logout()
                                 onHide={() => this.setState({ modal: false })}
                                 story={this.state.modelStory}
                                 submitForm={this.editStory}
-                                token={currentUser}
+                                token={currentUser.user.token}
                                 operation='edit'
                             />
                         </Container>
