@@ -16,11 +16,10 @@ export default class Login extends React.Component {
             error: false,
             errorMessage: ''
         }
-        this.onChange = this.onChange.bind(this)
-        //this.onSubmit = this.onSubmit.bind(this)
+        
     }
 
-    onChange(e) {
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
 
     }
@@ -52,11 +51,6 @@ export default class Login extends React.Component {
         console.log('checkpoint')
         const result = await this.verifyLogin(props)
 
-        //if(result) return console.log('result:')
-        // if (res.status === 'ok') {
-        //     this.setState({ authorized: true })
-        //     console.log(this.state.authorized)
-        // }
     }
 
     render() {
@@ -67,6 +61,12 @@ export default class Login extends React.Component {
                         return <div>
                             <Navbar />
                             <div className='container mt-5 pt-5'>
+                                <div className="row">
+                                 <div className="col-md-6 mt-5 mx-auto">
+
+                                 
+
+                                
                                 <form noValidate onSubmit={(e) => this.redirectToHome(props, e)}>
                                     <h1 className='text-light'>Sign in</h1>
                                     <div className='form-group'>
@@ -95,11 +95,14 @@ export default class Login extends React.Component {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="btn btn-lg btn-primary btn-block"
+                                        className="btn btn-primary btn-block"
+                                        style={{ background: '#88BDBC' }}
                                     >
                                         Sign in
-                    </button>
+                                    </button>
                                 </form>
+                                </div>
+                                </div>
                             </div>
                             <ErrorMessage onClose={() => this.setState({ error: false })} show={this.state.error} text={this.state.errorMessage} />
                         </div>
