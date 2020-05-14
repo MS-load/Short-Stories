@@ -20,7 +20,7 @@ class Register extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    console.log('prevent')
+
     const newUser = {
       user_name: this.state.user_name,
       email: this.state.email,

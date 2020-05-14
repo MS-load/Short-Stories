@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
 import { UserConsumer } from './Context/userContext'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import ErrorMessage from './errorMessage'
+import jwt_decode from 'jwt-decode'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -14,7 +14,6 @@ export default class Login extends React.Component {
             authorized: false,
             error: false,
             errorMessage: ''
-
         }
         this.onChange = this.onChange.bind(this)
         //this.onSubmit = this.onSubmit.bind(this)
@@ -33,13 +32,12 @@ export default class Login extends React.Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 console.log(res)
-                const { id, name, token } = res.data
-                
-                console.log(name, id)
                 if (res.statusText === 'OK') {
-                    props.setUser({name, id, token})
+                    const userDetails = jwt_decode(res.data)
+                    props.setUser({name: userDetails.user_name, id: userDetails._id, isAdmin: userDetails.isAdmin, token: res.data})
                 }
             }).then(()=>{
+                console.log(props.user)
                 this.setState({authorized: true})
             })
             .catch(err => {

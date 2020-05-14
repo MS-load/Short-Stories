@@ -5,8 +5,6 @@ import Nav from 'react-bootstrap/Nav'
 import CenteredModal from './CenteredModal'
 import { UserConsumer } from './Context/userContext'
 
-
-
 export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +12,6 @@ export default class Navigation extends React.Component {
       modal: false,
     }
   }
-
 
   render() {
     return (

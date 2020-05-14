@@ -34,8 +34,9 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    deleteStory(storyToDelete) {
+    deleteStory(storyToDelete, currentUser) {
         console.log(storyToDelete)
+        storyToDelete.token = currentUser.user.token
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
                 console.log(res.data)
@@ -55,7 +56,7 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    addStory(storyToAdd) {
+    addStory(storyToAdd, currentUser) {
         console.log(storyToAdd)
         console.log('checkpoint')
         axios.post('http://localhost:5000/stories', storyToAdd)
@@ -83,7 +84,8 @@ export default class StoriesList extends React.Component {
     render() {
         return (
             <UserConsumer>
-                {props => {
+                {currentUser => {
+                    console.log(currentUser.user)
                     return <div>
                         <Navbar addStory={this.addStory} />
                         <Container sm={12} md={8} lg={6} className='mt-5'>
@@ -97,13 +99,13 @@ export default class StoriesList extends React.Component {
                                             {/* <Button variant="primary">Read More</Button> */}
                                         </Card.Body>
                                         <Card.Footer className="text-muted d-flex justify-content-between p-2">
-                                            <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story)}
-                                                style={{ visibility: props.user.id === story.userId || props.user.isAdmin === true ? 'show' : 'hidden' }}
+                                            <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story, currentUser)}
+                                                style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >
                                                 Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
                                             <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
-                                                style={{ visibility: props.user.id === story.userId || props.user.isAdmin === true ? 'show' : 'hidden' }}
+                                                style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >Edit</Button>
                                         </Card.Footer>
                                     </Card>

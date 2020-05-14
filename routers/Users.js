@@ -61,8 +61,8 @@ users.post('/login', (req, res) => {
             expiresIn: '24h'
           })
           tokens.push(token)
-          const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
-          res.status(200).send(userDetails)
+          //const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
+          res.status(200).send(token)
         }
         // Passwords is not matching
         else {
