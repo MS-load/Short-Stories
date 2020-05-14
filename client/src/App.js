@@ -1,29 +1,20 @@
-import React, {useState} from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-
-
+import React from 'react';
+import { UserProvider } from './Context/userContext';
+import {Route, Switch } from 'react-router-dom'
 import HomePage from './HomePage'
 import Register from './Register';
 import Login from './Login'
-//import Profile from './Profile'
 
 function App() {
-  const [login, setLogin] = useState(false)
-  const [currentUser, setCurrentUser] = useState('guest')
+
   return (
-
-    
-
-        <Login currentUser={currentUser}/>
-        // <BrowserRouter>
-        //   <div className="App">
-
-        //   </div>
-
-
-        // </BrowserRouter>
-
-    
+      <UserProvider>
+        <Switch>
+          <Route path="/Login" component={Login} />
+          <Route path="/Register" component={Register} />
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </UserProvider>
   );
 }
 

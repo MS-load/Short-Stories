@@ -16,14 +16,15 @@ export default class CenteredModal extends React.Component {
             values = {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
-                _id: this.props.story._id
+                _id: this.props.story._id,
+                token: this.props.token
             }
         }
         else {
             values = {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
-                author: this.props.addAuthor
+                token: this.props.token
             }
         }
         this.props.submitForm(values)
@@ -39,10 +40,11 @@ export default class CenteredModal extends React.Component {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                className='modal-dialog-scrollable'
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {(!this.props.story) ? `${this.props.addAuthor}` : `${this.props.story.author}`}
+                        {(!this.props.story) ? `Your new story` : `${this.props.story.author}`}
 
                     </Modal.Title>
                 </Modal.Header>

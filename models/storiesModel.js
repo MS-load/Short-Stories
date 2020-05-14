@@ -11,6 +11,10 @@ let StoriesSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     body: {
         type: String,
         required: true
@@ -20,7 +24,8 @@ let StoriesSchema = mongoose.Schema({
         required: false
     }
 },
-    { timestamps: true }
+    { timestamps: true },
+     { versionKey: false }
 )
 
 module.exports = mongoose.model('Stories', StoriesSchema)

@@ -3,10 +3,9 @@ POST http://localhost:5000/users/register
 Content-Type: application/json
 
 {
-    "first_name": "Aa",
-    "last_name": "aa",
-    "email": "aa@test.com",
-    "password": "aa"
+    "user_name": "test",
+    "email": "test@test.com",
+    "password": "test"
 }
 
 ### 
@@ -16,4 +15,31 @@ Content-Type: application/json
 {
     "email": "aa@test.com",
     "password": "aa" 
+}
+### 
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email": "bb@test.com",
+    "password": "bb" 
+}
+
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email": "admin@root.com",
+    "password": "admin123" 
+}
+###
+GET http://localhost:5000/users/profile
+
+###
+POST http://localhost:5000/users/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
 }
