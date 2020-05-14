@@ -17,13 +17,14 @@ export default class CenteredModal extends React.Component {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
                 _id: this.props.story._id
+
             }
         }
         else {
             values = {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
-                userId: this.props.userId
+                token: this.props.token
             }
         }
         this.props.submitForm(values)

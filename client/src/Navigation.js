@@ -16,7 +16,7 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <UserConsumer>
-        {props => {
+        {currentUser => {
           return <div>
             <Navbar collapseOnSelect expand="lg" variant="dark" fixed="top" style={{ background: '#88BDBC' }}>
               <Navbar.Brand>Short Stories</Navbar.Brand>
@@ -25,9 +25,9 @@ export default class Navigation extends React.Component {
                 <Nav className="mr-auto">
 
                   <Nav.Link onClick={() => this.setState({ modal: true })}
-                    style={{ visibility: props.user.token === '' ? 'show' : 'hidden' }}>
+                    style={{ visibility: currentUser.user.token === '' ? 'hidden' : 'show' }}>
                     Add a story </Nav.Link>
-                  <Nav.Link style={{ visibility: props.user.token === '' ? 'show' : 'hidden' }}>My Stories</Nav.Link>
+                  <Nav.Link style={{ visibility: currentUser.user.token === '' ? 'hidden' : 'show' }}>My Stories</Nav.Link>
                 </Nav>
                 <Nav>
                   <Link to='/Login'>Login</Link>
@@ -38,7 +38,7 @@ export default class Navigation extends React.Component {
                 show={this.state.modal}
                 onHide={() => this.setState({ modal: false })}
                 submitForm={this.props.addStory}
-                userId={props.user.id}
+                token={currentUser.user.token}
                 operation='add'
               />
             </Navbar>
