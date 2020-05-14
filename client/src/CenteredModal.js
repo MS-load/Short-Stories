@@ -16,8 +16,8 @@ export default class CenteredModal extends React.Component {
             values = {
                 title: document.querySelector('[name="storyTitle"]').value,
                 body: document.querySelector('[name="storyBody"]').value,
-                _id: this.props.story._id
-
+                _id: this.props.story._id,
+                token: this.props.token
             }
         }
         else {

@@ -46,7 +46,7 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    editStory(storyToEdit) {
+    editStory(storyToEdit, currentUser) {
         console.log({ storyToEdit })
         axios.put('http://localhost:5000/stories', storyToEdit)
             .then(res => {
@@ -56,7 +56,7 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    addStory(storyToAdd, currentUser) {
+    addStory(storyToAdd) {
         console.log(storyToAdd)
         console.log('checkpoint')
         axios.post('http://localhost:5000/stories', storyToAdd)
@@ -93,18 +93,20 @@ export default class StoriesList extends React.Component {
                                 <Col md={6} className='bg-transparent' key={story._id}>
                                     <Card className="text-center mt-2" >
                                         <Card.Header className="text-left p-2">{story.author}</Card.Header>
-                                        <Card.Body style={{maxHeight: '150px', overflowY: 'auto'}}>
+                                        <Card.Body style={{ maxHeight: '150px', overflowY: 'auto' }}>
                                             <Card.Title>{story.title}</Card.Title>
                                             <Card.Text>{story.body}</Card.Text>
                                             {/* <Button variant="primary">Read More</Button> */}
                                         </Card.Body>
                                         <Card.Footer className="text-muted d-flex justify-content-between p-2">
-                                            <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story, currentUser)}
+                                            <Button variant="outline-danger" className="btn-sm"
+                                                onClick={(e) => this.deleteStory(story, currentUser)}
                                                 style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >
                                                 Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
-                                            <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
+                                            <Button variant="outline-primary" className="btn-sm"
+                                                onClick={() => this.setState({ modal: true, modelStory: story })}
                                                 style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >Edit</Button>
                                         </Card.Footer>
@@ -117,6 +119,7 @@ export default class StoriesList extends React.Component {
                                 onHide={() => this.setState({ modal: false })}
                                 story={this.state.modelStory}
                                 submitForm={this.editStory}
+                                token={currentUser.user.token}
                                 operation='edit'
                             />
                         </Container>

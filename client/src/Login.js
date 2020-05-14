@@ -31,18 +31,15 @@ export default class Login extends React.Component {
         }
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
-                console.log(res)
                 if (res.statusText === 'OK') {
                     const userDetails = jwt_decode(res.data)
                     props.setUser({name: userDetails.user_name, id: userDetails._id, isAdmin: userDetails.isAdmin, token: res.data})
                 }
             }).then(()=>{
-                console.log(props.user)
                 this.setState({authorized: true})
             })
             .catch(err => {
                 this.setState({ error: true })
-                console.log(err.response)
                 this.setState({ errorMessage: `${err.response.data}` })
             })
     }

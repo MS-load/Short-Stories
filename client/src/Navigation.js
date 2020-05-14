@@ -27,7 +27,7 @@ export default class Navigation extends React.Component {
                   <Nav.Link onClick={() => this.setState({ modal: true })}
                     style={{ visibility: currentUser.user.token === '' ? 'hidden' : 'show' }}>
                     Add a story </Nav.Link>
-                  <Nav.Link style={{ visibility: currentUser.user.token === '' ? 'hidden' : 'show' }}>My Stories</Nav.Link>
+                  <Nav.Link style={{ visibility: currentUser.user.isAdmin === true ? 'show' : 'hidden' }}>All users</Nav.Link>
                 </Nav>
                 <Nav>
                   <Link to='/Login'>Login</Link>
