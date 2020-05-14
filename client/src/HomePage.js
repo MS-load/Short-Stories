@@ -2,11 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import CenteredModal from './CenteredModal'
 import Navbar from './Navigation'
+import { UserConsumer } from './Context/userContext'
+import errorMessage from './errorMessage'
 
 export default class StoriesList extends React.Component {
     constructor(props) {
@@ -34,18 +35,30 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    deleteStory(storyToDelete) {
-        console.log(storyToDelete)
-        axios.delete('http://localhost:5000/stories', { data: storyToDelete })
+    logout(currentUser) {
+        axios.post('http://localhost:5000/users/logout', currentUser.user.token)
             .then(res => {
-                console.log(res.data)
-                this.setState({ update: !this.state.update })
+                console.log(res)
+                currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
             }).catch(error => {
                 console.log(error)
             })
     }
 
-    editStory(storyToEdit) {
+    deleteStory(storyToDelete, currentUser) {
+        console.log(storyToDelete)
+        storyToDelete.token = currentUser.user.token
+        axios.delete('http://localhost:5000/stories', { data: storyToDelete })
+            .then(res => {
+               this.setState({ update: !this.state.update })
+               console.log(res.status)
+            }).catch(error => {
+                console.log(error)
+                
+            })
+    }
+
+    editStory(storyToEdit, currentUser) {
         console.log({ storyToEdit })
         axios.put('http://localhost:5000/stories', storyToEdit)
             .then(res => {
@@ -60,7 +73,7 @@ export default class StoriesList extends React.Component {
         console.log('checkpoint')
         axios.post('http://localhost:5000/stories', storyToAdd)
             .then(res => {
-                console.log(Response)
+                console.log(res)
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
@@ -82,40 +95,49 @@ export default class StoriesList extends React.Component {
 
     render() {
         return (
-            <>
-                <Navbar currentUser={this.props.currentUser} addStory={this.addStory} />
-                    <Container className='mt-5 card-columns'>
-                        {this.state.stories.map(story =>
-                            <div className='bg-transparent' key={story._id}>
-                                <Card className="text-center mt-6">
-                                    <Card.Header className="text-left">{story.author}</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>{story.title}</Card.Title>
-                                        <Card.Text>{story.body}</Card.Text>
-                                        {/* <Button variant="primary">Read More</Button> */}
-                                    </Card.Body>
-                                    <Card.Footer className="text-muted d-flex justify-content-between">
-                                        <Button variant="outline-danger" className="btn-sm" onClick={(e) => this.deleteStory(story)}
-                                            style={{ visibility: this.props.currentUser === story.author || this.props.currentUser === 'admin' ? 'show' : 'hidden' }}
-                                        >Delete</Button>
-                                updated: {(story.updatedAt).substring(0, 10)}
-                                        <Button variant="outline-primary" className="btn-sm" onClick={() => this.setState({ modal: true, modelStory: story })}
-                                            style={{ visibility: this.props.currentUser === story.author || this.props.currentUser === 'admin' ? 'show' : 'hidden' }}
-                                        >Edit</Button>
-                                    </Card.Footer>
-                                </Card>
-                            </div>
-                        )
-                        }
-                        <CenteredModal
-                            show={this.state.modal}
-                            onHide={() => this.setState({ modal: false })}
-                            story={this.state.modelStory}
-                            submitForm={this.editStory}
-                            operation='edit'
-                        />
-                    </Container>
-            </>
+            <UserConsumer>
+                {currentUser => {
+                    console.log(currentUser.user)
+                    return <div>
+                        <Navbar addStory={this.addStory} />
+                        <Container sm={12} md={8} lg={6} className='mt-5'>
+                            {this.state.stories.map(story =>
+                                <Col md={6} className='bg-transparent' key={story._id}>
+                                    <Card className="text-center mt-2" >
+                                        <Card.Header className="text-left p-2">{story.author}</Card.Header>
+                                        <Card.Body style={{ maxHeight: '150px', overflowY: 'auto' }}>
+                                            <Card.Title>{story.title}</Card.Title>
+                                            <Card.Text>{story.body}</Card.Text>
+                                            {/* <Button variant="primary">Read More</Button> */}
+                                        </Card.Body>
+                                        <Card.Footer className="text-muted d-flex justify-content-between p-2">
+                                            <Button variant="outline-danger" className="btn-sm"
+                                                onClick={(e) => this.deleteStory(story, currentUser)}
+                                                style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
+                                            >
+                                                Delete</Button>
+                            updated: {(story.updatedAt).substring(0, 10)}
+                                            <Button variant="outline-primary" className="btn-sm"
+                                                onClick={() => this.setState({ modal: true, modelStory: story })}
+                                                style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
+                                            >Edit</Button>
+                                        </Card.Footer>
+                                    </Card>
+                                </Col>
+                            )
+                            }
+                            <CenteredModal
+                                show={this.state.modal}
+                                onHide={() => this.setState({ modal: false })}
+                                story={this.state.modelStory}
+                                submitForm={this.editStory}
+                                token={currentUser}
+                                operation='edit'
+                            />
+                        </Container>
+                    </div>
+                }}
+            </UserConsumer>
         )
     }
 }
