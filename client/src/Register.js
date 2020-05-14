@@ -16,11 +16,10 @@ class Register extends Component {
       errorMessage: ''
     }
 
-    this.onChange = this.onChange.bind(this)
-    // this.onSubmit = this.onSubmit.bind(this)
+    
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -68,7 +67,7 @@ class Register extends Component {
             <div className="row">
               <div className="col-md-6 mt-5 mx-auto">
                 <form noValidate onSubmit={(e) => this.redirectToLogin(e)}>
-                  <h1 className="h3 mb-3 font-weight-normal text-light">Register</h1>
+                  <h1 className="text-light">Register</h1>
                   <div className="form-group">
                     <label htmlFor="name" className=' text-light'>User name</label>
                     <input
@@ -107,7 +106,8 @@ class Register extends Component {
                   </div>
                   <button
                     type="submit"
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-primary btn-block"
+                    style={{ background: '#88BDBC' }}
                   >
                     Register
               </button>
