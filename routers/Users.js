@@ -2,23 +2,26 @@ const express = require('express')
 const users = express.Router()
 
 const jwt = require('jsonwebtoken')
+const jwy_decode = require('jwt-decode')
 const bcrypt = require('bcrypt')
 
-const User = require('../models/User')
-
+const User = require('../models/userModel')
 
 process.env.SECRET_KEY = 'secret'
+let tokens = []
+
+function isTokenKnown(qToken) {
+  return tokens.includes(qToken)
+}
+
+function removeToken(qtoken){
+  tokens = tokens.filter(item => item !== qtoken)
+  console.log('done')
+}
 
 users.post('/register', (req, res) => {
   const today = new Date()
-  const userData = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    password: req.body.password,
-    created: today
-  }
-
+  const userData = req.body
   User.findOne({
     email: req.body.email
   })
@@ -28,7 +31,7 @@ users.post('/register', (req, res) => {
           userData.password = hash
           User.create(userData)
             .then(user => {
-              
+
               res.send({ status: user.email + ' Registered!' })
             })
             .catch(err => {
@@ -45,52 +48,48 @@ users.post('/register', (req, res) => {
 })
 
 users.post('/login', (req, res) => {
-    User.findOne({
-      email: req.body.email
-    })
-      .then(user => {
-        if (user) {
-            // Passwords is matching
-          if (bcrypt.compareSync(req.body.password, user.password)) {
-            const payload = {
-              _id: user._id,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email
-            }
-            let token = jwt.sign(payload, process.env.SECRET_KEY, {
-              expiresIn: 1440
-            })
-            res.send(user._id)
-            // Passwords is not matching
-          } else {
-            res.send({ error: 'User does not exist' })
+  console.log(req.body)
+  User.findOne({
+    email: req.body.email
+  })
+    .then(user => {
+      if (user) {
+        // Passwords is matching
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          const payload = {
+            _id: user._id,
+            user_name: user.user_name,
+            isAdmin: user.isAdmin,
+            email: user.email
           }
-        } else {
-          res.send({ error: 'User does not exist' })
+          let token = jwt.sign(payload, process.env.SECRET_KEY, {
+            expiresIn: '5s'
+          })
+          tokens.push(token)
+          //const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
+          res.status(200).send(token)
         }
-      })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
-  })
-
-  users.get('/profile', (req, res) => {
-    const decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-  
-    User.findOne({
-      _id: decoded._id
+        // Passwords is not matching
+        else {
+          res.status(401).send('Incorrect Password')
+        }
+      } else {
+        res.status(401).send('User does not exist')
+      }
     })
-      .then(user => {
-        if (user) {
-          res.json(user)
-        } else {
-          res.send('User does not exist')
-        }
-      })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
-  })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
 
-module.exports = users
+users.post('/logout', (req, res) => {
+  removeToken(req.body)
+
+  res.status(200).send({message : 'LoggedOut'})
+
+})
+
+
+module.exports.users = users
+module.exports.isTokenKnown = isTokenKnown
+module.exports.removeToken = removeToken

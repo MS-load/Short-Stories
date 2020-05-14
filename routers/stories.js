@@ -1,38 +1,133 @@
 const express = require('express')
 const StoryModel = require('../models/storiesModel')
-
-
+const UserModel = require('../models/userModel')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
+const jwt_decode = require('jwt-decode')
+const Users = require('./Users')
 
 //Create a Story
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body, 'here')
         const story = req.body
-        const storyInfo = await new StoryModel(story)
-        const storySave = await storyInfo.save()
-        console.log(storySave)
-        return res.status(200).send(JSON.stringify(storySave))
+        if (story.token == null) return res.sendStatus(401)
+        if (!Users.isTokenKnown(story.token)) return res.sendStatus(401)
+        jwt.verify(story.token, process.env.SECRET_KEY, async (err, user) => {
+            try {
+                if (err) {
+                    Users.removeToken(story.token)
+                    return res.sendStatus(403)
+                }
+                const decoded = await jwt_decode(story.token)
+                delete story.token
+                story.author = decoded.user_name
+                story.userId = decoded._id
+                const storyInfo = await new StoryModel(story)
+                const storySave = await storyInfo.save()
+                return res.status(200).send({ message: 'Story added' })
+            } catch (error) {
+                console.log(error);
+            }
+
+        })
     }
     catch (error) {
         console.log(error);
     }
 })
 
+//Delete specific Story
+router.delete('/', async (req, res) => {
+    try {
+        const { _id, token } = req.body
+        if (token == null) return res.sendStatus(401)
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)
+        jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
+            try {
+                if (err) {
+                    Users.removeToken(token)
+                    return res.status(403).send({message : 'user has been logged out'})
+                }
+
+                const decoded = await jwt_decode(token)
+                const storyToDelete = await StoryModel.findOne({
+                    _id: _id
+                })
+                if (!storyToDelete) return res.status(401).send({
+                    message: "Unknown story",
+                    id: _id
+                });
+
+                const delAuthorized = decoded.isAdmin || (decoded._id == storyToDelete.userId)
+                if (!delAuthorized) return res.status(401).send({
+                    message: "Delete unauthorized",
+                    id: _id
+                });
+                await StoryModel.findByIdAndRemove(_id, { new: true, useFindAndModify: false })
+                return res.status(200).send({
+                    message: "Delete successful",
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+})
+
+//Update specific story
+router.put('/', async (req, res) => {
+    try {
+        const { title, body, _id, token } = req.body
+        if (token == null) return res.sendStatus(401)
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)
+        jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
+            try {
+                if (err) {
+                    Users.removeToken(token)
+                    return res.sendStatus(403)
+                }
+
+                const decoded = await jwt_decode(token)
+                console.log(decoded)
+                const storyToUpdate = await StoryModel.findOne({
+                    _id: _id
+                })
+                if (!storyToUpdate) return res.status(401).send({
+                    message: "Unknown story",
+                    id: _id
+                });
+                const updAuthorized = decoded.isAdmin || (decoded._id == storyToUpdate.userId)
+                if (!updAuthorized) return res.status(401).send({
+                    message: "Update unauthorized",
+                    id: _id
+                });
+                delete req.body.token
+                StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
+                    if (err) return res.status(400).send(err);
+                    return res.status(200).send(story)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 //Read all Stories
 router.get('/', async (req, res) => {
-    // const { page = 1, limit = 3 } = req.query;
     try {
         const allStories = await StoryModel.find()
             .sort('-createdAt')
-        // .limit(limit * 1)
-        // .skip((page - 1) * limit)
-
         const count = await StoryModel.countDocuments();
         res.json({
             allStories,
-            // totalPages: Math.ceil(count / limit),
-            // currentPage: page
         })
     }
     catch (error) {
@@ -59,41 +154,6 @@ router.get('/author', async (req, res) => {
     catch (error) {
         console.log(error)
     }
-})
-
-//Update specific story
-router.put('/', (req, res) => {
-    const { _id } = req.body
-    console.log('checkpoint 1')
-    console.log(req.body)
-    console.log(_id)
-    StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
-        if (err) return res.status(500).send(err);
-        return res.status(200).send(story)
-    })
-})
-
-//Delete specific Story
-router.delete('/', async (req, res) => {
-    const { _id } = req.body
-    console.log(_id)
-    try {
-        const storyToDelete = await StoryModel.findByIdAndRemove(_id, { new: true, useFindAndModify: false })
-        console.log('checkpoint')
-        if (!storyToDelete) return res.status(500).send({
-            message: "nothing to delete",
-            id: _id
-        });
-
-        return res.status(200).send({
-            message: "successfully deleted",
-            id: _id
-        })
-    }
-    catch (error) {
-        console.log(error)
-    }
-
 })
 
 module.exports = router;

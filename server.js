@@ -25,7 +25,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 //All database endpoints
 app.use('/stories', stories)
-app.use('/users', Users)
+app.use('/users', Users.users)
 
 app.use((error, req, res, next)=>{
     console.log(error)

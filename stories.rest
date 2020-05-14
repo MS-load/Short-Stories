@@ -1,14 +1,44 @@
+###
 POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
-    "title": "Bacon",
-    "body":" Bacon ipsum dolor amet hamburger ribeye biltong, venison chuck capicola frankfurter brisket beef ribs bacon sirloin burgdoggen drumstick. Filet mignon turducken alcatra, porchetta corned beef jowl chicken. Meatloaf sausage pork, pork loin shank drumstick brisket prosciutto capicola tenderloin turkey. Prosciutto hamburger tri-tip shankle swine landjaeger chuck drumstick strip steak doner t-bone. Doner andouille shankle porchetta, brisket venison pig turkey capicola fatback alcatra sirloin. Chuck hamburger salami, strip steak pork ball tip short ribs jowl doner kielbasa sausage. Spare ribs tail kielbasa, shankle strip steak jerky kevin short ribs corned beef biltong bacon. ",
-    "author":"E"
+    "title": "Story Z",
+    "body":"body z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0NTYyMzgsImV4cCI6MTU4OTQ1NjI0M30.yEwrTH3FDBsUqodFTR1lBKrxQEIlTQJewN1OGsXOhLM"
 }
 
 ###
+DELETE http://localhost:5000/stories
+Content-Type: application/json
+
+{
+    "_id": "5ebcd54449e41531708b360a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
+}
+
+###
+//Delete by some other user
+DELETE http://localhost:5000/stories
+Content-Type: application/json
+
+{
+    "_id": "5ebad6ee8005d920507dbdad",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE4MDQ5YWU0OTYxNGM2YWFkYjMiLCJ1c2VyX25hbWUiOiJCIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYmJAdGVzdC5jb20iLCJpYXQiOjE1ODk0MDE2OTQsImV4cCI6MTU4OTQ4ODA5NH0.ILXiq1oWoxl5_O-Q5S0dQWJCiA5OQC2DvRf8YxkfDTA"
+}
+
+###
+//Delete by admin
+DELETE http://localhost:5000/stories
+Content-Type: application/json
+
+{
+    "_id": "5ebc4fb2b7c08c012c338a63",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
+}
+###
 GET http://localhost:5000/stories
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiZW1haWwiOiJhYUB0ZXN0LmNvbSIsImlhdCI6MTU4OTM4OTY4NiwiZXhwIjoxNTg5NDc2MDg2fQ.ab4tF4UORaqYJWO-0Firia_R8zkASYKtHeaNUSkXdPE
 
 ###
 GET http://localhost:5000/stories/author?author=Dhas&page=1&limit=3
@@ -18,17 +48,32 @@ PUT http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "body":"Work 1",
-    "id": "5eb907be9b27e32354a5750a"
+    "title": "Work 1",
+    "body":"work 1",
+    "_id": "5ebc4fb2b7c08c012c338a63",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODkzOTkzODUsImV4cCI6MTU4OTQ4NTc4NX0.G-rs0PQeA5MfzqEG2TxIUgnDbne4QA6yCfqevApm2zE"
 }
 
 ###
-DELETE http://localhost:5000/stories
+//Update by another user
+PUT http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "_id": "5eb907be9b27e32354a5750a"
+    "title": "Work 1",
+    "body":"work 1",
+    "_id": "5ebc4fb2b7c08c012c338a63",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE4MDQ5YWU0OTYxNGM2YWFkYjMiLCJ1c2VyX25hbWUiOiJCIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYmJAdGVzdC5jb20iLCJpYXQiOjE1ODk0MDE2OTQsImV4cCI6MTU4OTQ4ODA5NH0.ILXiq1oWoxl5_O-Q5S0dQWJCiA5OQC2DvRf8YxkfDTA"
 }
 
+###
+//Update by another user
+PUT http://localhost:5000/stories
+Content-Type: application/json
 
-
+{
+    "title": "Work 1ad",
+    "body":"work 1ad",
+    "_id": "5ebcd54449e41531708b360a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
+}
