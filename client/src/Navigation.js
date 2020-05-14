@@ -58,6 +58,7 @@ export default class Navigation extends React.Component {
                 submitForm={this.props.addStory}
                 token={currentUser.user.token}
                 operation='add'
+                currentUser={currentUser}
               />
             </Navbar>
           </div>
