@@ -1,5 +1,5 @@
 html{
-  background: url(./assets/bg1.jpg) no-repeat center center fixed;
+  background: url(./assets/bg3.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,7 +17,6 @@ body {
   right: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
-
 }
 
 /* Let's get this party started */
@@ -42,3 +41,19 @@ body {
 ::-webkit-scrollbar-thumb:window-inactive {
 background: #88BDBC;
 }
+
+@media (min-width: 35em) {
+  .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media (min-width: 62em) {
+  .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+  }
+} 
