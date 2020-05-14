@@ -1,10 +1,11 @@
+###
 POST http://localhost:5000/stories
 Content-Type: application/json
 
 {   
     "title": "Story Z",
     "body":"body z",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODkzOTkzODUsImV4cCI6MTU4OTQ4NTc4NX0.G-rs0PQeA5MfzqEG2TxIUgnDbne4QA6yCfqevApm2zE"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
 }
 
 ###
@@ -12,8 +13,8 @@ DELETE http://localhost:5000/stories
 Content-Type: application/json
 
 {
-    "_id": "5ebc4fb2b7c08c012c338a63",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODkzOTkzODUsImV4cCI6MTU4OTQ4NTc4NX0.G-rs0PQeA5MfzqEG2TxIUgnDbne4QA6yCfqevApm2zE"
+    "_id": "5ebcd54449e41531708b360a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
 }
 
 ###
@@ -33,7 +34,7 @@ Content-Type: application/json
 
 {
     "_id": "5ebc4fb2b7c08c012c338a63",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDEwNjQ5YWU0OTYxNGM2YWFkYjEiLCJ1c2VyX25hbWUiOiJyb290IiwiaXNBZG1pbiI6dHJ1ZSwiZW1haWwiOiJhZG1pbkByb290LmNvbSIsImlhdCI6MTU4OTQwMDM1MywiZXhwIjoxNTg5NDg2NzUzfQ.ivxcoFeiRHYEPIoj4LWRga17ukBzLKk0QYs5aaa-V4I"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
 }
 ###
 GET http://localhost:5000/stories
@@ -73,9 +74,6 @@ Content-Type: application/json
 {
     "title": "Work 1ad",
     "body":"work 1ad",
-    "_id": "5ebc4fb2b7c08c012c338a63",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDEwNjQ5YWU0OTYxNGM2YWFkYjEiLCJ1c2VyX25hbWUiOiJyb290IiwiaXNBZG1pbiI6dHJ1ZSwiZW1haWwiOiJhZG1pbkByb290LmNvbSIsImlhdCI6MTU4OTQwMDM1MywiZXhwIjoxNTg5NDg2NzUzfQ.ivxcoFeiRHYEPIoj4LWRga17ukBzLKk0QYs5aaa-V4I"
+    "_id": "5ebcd54449e41531708b360a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
 }
-
-
-

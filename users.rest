@@ -3,9 +3,9 @@ POST http://localhost:5000/users/register
 Content-Type: application/json
 
 {
-    "user_name": "E",
-    "email": "ee@test.com",
-    "password": "ee"
+    "user_name": "M",
+    "email": "mm@test.com",
+    "password": "mm"
 }
 
 ### 
@@ -35,3 +35,11 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:5000/users/profile
+
+###
+POST http://localhost:5000/users/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiMDE3MzQ5YWU0OTYxNGM2YWFkYjIiLCJ1c2VyX25hbWUiOiJBIiwiaXNBZG1pbiI6ZmFsc2UsImVtYWlsIjoiYWFAdGVzdC5jb20iLCJpYXQiOjE1ODk0MzM2NDAsImV4cCI6MTU4OTUyMDA0MH0.hVGQm9nLVxdpEdmcSmD02VsV4saedrPLSuUc_HQgkhI"
+}

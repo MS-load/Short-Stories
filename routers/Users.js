@@ -8,18 +8,15 @@ const bcrypt = require('bcrypt')
 const User = require('../models/userModel')
 
 process.env.SECRET_KEY = 'secret'
+let tokens = []
+
+function isTokenKnown(qToken) {
+  return tokens.includes(qToken)
+}
 
 users.post('/register', (req, res) => {
-  console.log(req)
   const today = new Date()
-  const userData = {
-    user_name: req.body.user_name,
-    email: req.body.email,
-    password: req.body.password,
-    isAdmin: false,
-    created: today
-  }
-
+  const userData = req.body
   User.findOne({
     email: req.body.email
   })
@@ -29,7 +26,7 @@ users.post('/register', (req, res) => {
           userData.password = hash
           User.create(userData)
             .then(user => {
-              
+
               res.send({ status: user.email + ' Registered!' })
             })
             .catch(err => {
@@ -47,37 +44,46 @@ users.post('/register', (req, res) => {
 
 users.post('/login', (req, res) => {
   console.log(req.body)
-    User.findOne({
-      email: req.body.email
-    })
-      .then(user => {
-        if (user) {
-           // Passwords is matching
-          if (bcrypt.compareSync(req.body.password, user.password)) {
-            const payload = {
-              _id: user._id,
-              user_name: user.user_name,
-              isAdmin: user.isAdmin,
-              email: user.email
-            }
-            let token = jwt.sign(payload, process.env.SECRET_KEY, {
-              expiresIn: '24h'
-            })
-            const userDetails = {id: user._id, isAdmin: user.isAdmin, token: token}
-            res.status(200).send(userDetails)          
-          } 
-          // Passwords is not matching
-          else {
-            res.status(401).send('Incorrect Password')
-          }
-        } else {
-          res.status(401).send('User does not exist')
-        }
-      })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
+  User.findOne({
+    email: req.body.email
   })
+    .then(user => {
+      if (user) {
+        // Passwords is matching
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          const payload = {
+            _id: user._id,
+            user_name: user.user_name,
+            isAdmin: user.isAdmin,
+            email: user.email
+          }
+          let token = jwt.sign(payload, process.env.SECRET_KEY, {
+            expiresIn: '24h'
+          })
+          tokens.push(token)
+          const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
+          res.status(200).send(userDetails)
+        }
+        // Passwords is not matching
+        else {
+          res.status(401).send('Incorrect Password')
+        }
+      } else {
+        res.status(401).send('User does not exist')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+users.post('/logout', (req, res) => {
+  
+  tokens = tokens.filter(item => item !== req.body)
+  res.status(200).send({message : 'LoggedOut'})
+
+})
 
 
-module.exports = users
+module.exports.users = users
+module.exports.isTokenKnown = isTokenKnown

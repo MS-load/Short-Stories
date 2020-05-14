@@ -4,13 +4,15 @@ const UserModel = require('../models/userModel')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const jwt_decode = require('jwt-decode')
+const Users = require('./Users')
 
 //Create a Story
 router.post('/', async (req, res) => {
     try {
         const story = req.body
         if (story.token == null) return res.sendStatus(401)
-        jwt.verify(story.token, 'secret', async (err, user) => {
+        if (!Users.isTokenKnown(story.token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        jwt.verify(story.token, process.env.SECRET_KEY, async (err, user) => {
             try {
                 if (err) return res.sendStatus(403)
                 const decoded = await jwt_decode(story.token)
@@ -20,7 +22,6 @@ router.post('/', async (req, res) => {
                 const storyInfo = await new StoryModel(story)
                 const storySave = await storyInfo.save()
                 return res.status(200).send({ message: 'Story added' })
-
             } catch (error) {
                 console.log(error);
             }
@@ -37,7 +38,8 @@ router.delete('/', async (req, res) => {
     try {
         const { _id, token } = req.body
         if (token == null) return res.sendStatus(401)
-        jwt.verify(token, 'secret', async (err, user) => {
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
             try {
                 const decoded = await jwt_decode(token)
                 const storyToDelete = await StoryModel.findOne({
@@ -73,7 +75,8 @@ router.put('/', async (req, res) => {
     try {
         const { title, body, _id, token } = req.body
         if (token == null) return res.sendStatus(401)
-        jwt.verify(token, 'secret', async (err, user) => {
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
             try {
                 const decoded = await jwt_decode(token)
                 console.log(decoded)

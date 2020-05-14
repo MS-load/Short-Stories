@@ -6,7 +6,6 @@ const UserSchema = new Schema({
     user_name: {
         type: String,
         required: true
-
     },
     email: {
         type: String,
@@ -18,13 +17,13 @@ const UserSchema = new Schema({
     },
     date: {
         type: Date,
-        date: Date.now
+        date: Date.now       
     },
     isAdmin: {
         type: Boolean,
-        required: true
-    },
-
+        required: true,
+        default: false
+    },   
 },{ versionKey: false })
 
 module.exports = User = mongoose.model('users', UserSchema)
