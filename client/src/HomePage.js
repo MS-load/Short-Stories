@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import CenteredModal from './CenteredModal'
 import Navbar from './Navigation'
 import { UserConsumer } from './Context/userContext'
+import errorMessage from './errorMessage'
 
 export default class StoriesList extends React.Component {
     constructor(props) {
@@ -34,15 +35,26 @@ export default class StoriesList extends React.Component {
             })
     }
 
+    logout(currentUser) {
+        axios.post('http://localhost:5000/users/logout', currentUser.user.token)
+            .then(res => {
+                console.log(res)
+                currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
+            }).catch(error => {
+                console.log(error)
+            })
+    }
+
     deleteStory(storyToDelete, currentUser) {
         console.log(storyToDelete)
         storyToDelete.token = currentUser.user.token
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
-                console.log(res.data)
-                this.setState({ update: !this.state.update })
+               this.setState({ update: !this.state.update })
+               console.log(res.status)
             }).catch(error => {
                 console.log(error)
+                
             })
     }
 
