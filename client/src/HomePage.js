@@ -35,14 +35,16 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    logout(currentUser) {
-        axios.post('http://localhost:5000/users/logout', currentUser.user.token)
-            .then(res => {
-                console.log(res)
-                currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
-            }).catch(error => {
-                console.log(error)
-            })
+    logout() {
+        let value = this.context 
+        console.log(value.token)
+        // axios.post('http://localhost:5000/users/logout', currentUser.user.token)
+        //     .then(res => {
+        //         console.log(res)
+        //         currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
+        //     }).catch(error => {
+        //         console.log(error)
+        //     })
     }
 
     deleteStory(storyToDelete, currentUser) {
@@ -50,11 +52,16 @@ export default class StoriesList extends React.Component {
         storyToDelete.token = currentUser.user.token
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
-               this.setState({ update: !this.state.update })
-               console.log(res.status)
+                // if (res.data.error) {
+                   
+                // }
+this.logout()
+                this.setState({ update: !this.state.update })
+
+
             }).catch(error => {
                 console.log(error)
-                
+
             })
     }
 
@@ -62,6 +69,10 @@ export default class StoriesList extends React.Component {
         console.log({ storyToEdit })
         axios.put('http://localhost:5000/stories', storyToEdit)
             .then(res => {
+                if (res.data.error) {
+                    return this.logout(currentUser.user.token)
+                }
+
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
@@ -74,6 +85,9 @@ export default class StoriesList extends React.Component {
         axios.post('http://localhost:5000/stories', storyToAdd)
             .then(res => {
                 console.log(res)
+                if (res.data.error) {
+                    return this.logout(storyToAdd.token)
+                }
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
