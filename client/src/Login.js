@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import ErrorMessage from './errorMessage'
 import jwt_decode from 'jwt-decode'
+import Navbar from './Navigation'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -33,10 +34,10 @@ export default class Login extends React.Component {
             .then(res => {
                 if (res.statusText === 'OK') {
                     const userDetails = jwt_decode(res.data)
-                    props.setUser({name: userDetails.user_name, id: userDetails._id, isAdmin: userDetails.isAdmin, token: res.data})
+                    props.setUser({ name: userDetails.user_name, id: userDetails._id, isAdmin: userDetails.isAdmin, token: res.data })
                 }
-            }).then(()=>{
-                this.setState({authorized: true})
+            }).then(() => {
+                this.setState({ authorized: true })
             })
             .catch(err => {
                 this.setState({ error: true })
@@ -64,7 +65,8 @@ export default class Login extends React.Component {
                 (<UserConsumer>
                     {props => {
                         return <div>
-                            <div className='container'>
+                            <Navbar />
+                            <div className='container mt-5 pt-5'>
                                 <form noValidate onSubmit={(e) => this.redirectToHome(props, e)}>
                                     <h1 className='text-light'>Sign in</h1>
                                     <div className='form-group'>
