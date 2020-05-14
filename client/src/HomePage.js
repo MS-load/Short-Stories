@@ -100,15 +100,14 @@ export default class StoriesList extends React.Component {
                     console.log(currentUser.user)
                     return <div>
                         <Navbar addStory={this.addStory} />
-                        <Container sm={12} md={8} lg={6} className='mt-5'>
+                        <Container className='mt-5 card-columns'>
                             {this.state.stories.map(story =>
-                                <Col md={6} className='bg-transparent' key={story._id}>
+                                <div className='bg-transparent' key={story._id}>
                                     <Card className="text-center mt-2" >
                                         <Card.Header className="text-left p-2">{story.author}</Card.Header>
                                         <Card.Body style={{ maxHeight: '150px', overflowY: 'auto' }}>
                                             <Card.Title>{story.title}</Card.Title>
                                             <Card.Text>{story.body}</Card.Text>
-                                            {/* <Button variant="primary">Read More</Button> */}
                                         </Card.Body>
                                         <Card.Footer className="text-muted d-flex justify-content-between p-2">
                                             <Button variant="outline-danger" className="btn-sm"
@@ -123,7 +122,7 @@ export default class StoriesList extends React.Component {
                                             >Edit</Button>
                                         </Card.Footer>
                                     </Card>
-                                </Col>
+                                </div>
                             )
                             }
                             <CenteredModal
