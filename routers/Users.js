@@ -32,14 +32,14 @@ users.post('/register', (req, res) => {
           User.create(userData)
             .then(user => {
 
-              res.send({ status: user.email + ' Registered!' })
+              res.status(200).send({ status: user.email + ' Registered!' })
             })
             .catch(err => {
               res.send('error: ' + err)
             })
         })
       } else {
-        res.send({ error: 'User already exists' })
+        res.status(401).send('User already exists')
       }
     })
     .catch(err => {
@@ -63,7 +63,7 @@ users.post('/login', (req, res) => {
             email: user.email
           }
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: '5s'
+            expiresIn: '24h'
           })
           tokens.push(token)
           //const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
