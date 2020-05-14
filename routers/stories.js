@@ -11,10 +11,13 @@ router.post('/', async (req, res) => {
     try {
         const story = req.body
         if (story.token == null) return res.sendStatus(401)
-        if (!Users.isTokenKnown(story.token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        if (!Users.isTokenKnown(story.token)) return res.sendStatus(401)
         jwt.verify(story.token, process.env.SECRET_KEY, async (err, user) => {
             try {
-                if (err) return res.sendStatus(403)
+                if (err) {
+                    Users.removeToken(story.token)
+                    return res.sendStatus(403)
+                }
                 const decoded = await jwt_decode(story.token)
                 delete story.token
                 story.author = decoded.user_name
@@ -38,14 +41,19 @@ router.delete('/', async (req, res) => {
     try {
         const { _id, token } = req.body
         if (token == null) return res.sendStatus(401)
-        if (!Users.isTokenKnown(token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)
         jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
             try {
+                if (err) {
+                    Users.removeToken(token)
+                    return res.sendStatus(403)
+                }
+
                 const decoded = await jwt_decode(token)
                 const storyToDelete = await StoryModel.findOne({
                     _id: _id
                 })
-                if (!storyToDelete) return res.status(500).send({
+                if (!storyToDelete) return res.status(401).send({
                     message: "Unknown story",
                     id: _id
                 });
@@ -75,15 +83,20 @@ router.put('/', async (req, res) => {
     try {
         const { title, body, _id, token } = req.body
         if (token == null) return res.sendStatus(401)
-        if (!Users.isTokenKnown(token)) return res.sendStatus(401)//.send({message : 'Unknown user'})
+        if (!Users.isTokenKnown(token)) return res.sendStatus(401)
         jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
             try {
+                if (err) {
+                    Users.removeToken(token)
+                    return res.sendStatus(403)
+                }
+
                 const decoded = await jwt_decode(token)
                 console.log(decoded)
                 const storyToUpdate = await StoryModel.findOne({
                     _id: _id
                 })
-                if (!storyToUpdate) return res.status(500).send({
+                if (!storyToUpdate) return res.status(401).send({
                     message: "Unknown story",
                     id: _id
                 });
@@ -94,7 +107,7 @@ router.put('/', async (req, res) => {
                 });
                 delete req.body.token
                 StoryModel.findByIdAndUpdate(_id, req.body, { new: true, useFindAndModify: false }, (err, story) => {
-                    if (err) return res.status(500).send(err);
+                    if (err) return res.status(400).send(err);
                     return res.status(200).send(story)
                 })
             } catch (error) {

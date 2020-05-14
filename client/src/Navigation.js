@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import CenteredModal from './CenteredModal'
 import { UserConsumer } from './Context/userContext'
+import axios from 'axios'
 
 export default class Navigation extends React.Component {
   constructor(props) {
@@ -13,13 +14,27 @@ export default class Navigation extends React.Component {
     }
   }
 
+  logout(currentUser) {
+      axios.post('http://localhost:5000/users/logout', currentUser.user.token)
+      .then(res => {
+        console.log(res)
+        currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
+      }).catch(error => {
+        console.log(error)
+      })
+  }
+
   render() {
     return (
       <UserConsumer>
         {currentUser => {
           return <div>
             <Navbar collapseOnSelect expand="lg" variant="dark" fixed="top" style={{ background: '#88BDBC' }}>
-              <Navbar.Brand>Short Stories</Navbar.Brand>
+              <Navbar.Brand>
+                <Link className='text-white font-weight-bold' to='/'>
+                  Short Stories
+              </Link>
+              </Navbar.Brand>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
@@ -29,14 +44,14 @@ export default class Navigation extends React.Component {
                   <Nav.Link style={{ display: currentUser.user.isAdmin === true ? 'block' : 'none' }}>All users</Nav.Link>
                 </Nav>
                 <Nav style={{ display: currentUser.user.token === '' ? 'block' : 'none' }}>
-                      <Link className="nav-item mr-5 text-white" to='/Login'>Login</Link>
-                      <Link className="nav-item mr-2 text-white" to='/Register'>Register</Link>                             
+                  <Link className="nav-item mr-5 text-white" to='/Login'>Login</Link>
+                  <Link className="nav-item mr-2 text-white" to='/Register'>Register</Link>
                 </Nav>
-                <Nav style={{ display: currentUser.user.token === '' ? 'none' : 'flex' }}>              
-                      <Navbar.Text className='text-white mr-5'>{currentUser.user.name}</Navbar.Text>
-                      <Nav.Link className='text-white' onClick={() => {console.log('logout')}}>Logout</Nav.Link>
+                <Nav style={{ display: currentUser.user.token === '' ? 'none' : 'flex' }}>
+                  <Navbar.Text className='text-white mr-5'>{currentUser.user.name}</Navbar.Text>
+                  <Nav.Link className='text-white' onClick={() => this.logout(currentUser)}>Logout</Nav.Link>
                 </Nav>
-              </Navbar.Collapse> 
+              </Navbar.Collapse>
               <CenteredModal
                 show={this.state.modal}
                 onHide={() => this.setState({ modal: false })}

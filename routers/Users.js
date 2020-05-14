@@ -14,6 +14,11 @@ function isTokenKnown(qToken) {
   return tokens.includes(qToken)
 }
 
+function removeToken(qtoken){
+  tokens = tokens.filter(item => item !== qtoken)
+  console.log('done')
+}
+
 users.post('/register', (req, res) => {
   const today = new Date()
   const userData = req.body
@@ -58,7 +63,7 @@ users.post('/login', (req, res) => {
             email: user.email
           }
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: '24h'
+            expiresIn: '5s'
           })
           tokens.push(token)
           //const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
@@ -78,8 +83,8 @@ users.post('/login', (req, res) => {
 })
 
 users.post('/logout', (req, res) => {
-  
-  tokens = tokens.filter(item => item !== req.body)
+  removeToken(req.body)
+
   res.status(200).send({message : 'LoggedOut'})
 
 })
@@ -87,3 +92,4 @@ users.post('/logout', (req, res) => {
 
 module.exports.users = users
 module.exports.isTokenKnown = isTokenKnown
+module.exports.removeToken = removeToken

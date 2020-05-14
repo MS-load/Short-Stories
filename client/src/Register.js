@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-
+import Navbar from './Navigation'
 
 class Register extends Component {
   constructor() {
@@ -34,6 +34,8 @@ class Register extends Component {
 
   render() {
     return (
+      <>
+       <Navbar />
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
@@ -82,6 +84,7 @@ class Register extends Component {
           </div>
         </div>
       </div>
+      </>
     )
   }
 }

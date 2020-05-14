@@ -119,7 +119,7 @@ export default class StoriesList extends React.Component {
                                 onHide={() => this.setState({ modal: false })}
                                 story={this.state.modelStory}
                                 submitForm={this.editStory}
-                                token={currentUser.user.token}
+                                token={currentUser}
                                 operation='edit'
                             />
                         </Container>
