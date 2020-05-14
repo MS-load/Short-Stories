@@ -72,6 +72,7 @@ class Register extends Component {
                   <div className="form-group">
                     <label htmlFor="name" className=' text-light'>User name</label>
                     <input
+                    required
                       type="text"
                       className="form-control"
                       name="user_name"
@@ -83,6 +84,7 @@ class Register extends Component {
                   <div className="form-group">
                     <label htmlFor="email" className=' text-light'>Email address</label>
                     <input
+                    required
                       type="email"
                       className="form-control"
                       name="email"
@@ -94,6 +96,7 @@ class Register extends Component {
                   <div className="form-group">
                     <label htmlFor="password" className=' text-light'>Password</label>
                     <input
+                    required
                       type="password"
                       className="form-control"
                       name="password"
