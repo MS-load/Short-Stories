@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "5ebb010649ae49614c6aadb1"
+  },
+  "user_name": "root",
+  "email": "admin@root.com",
+  "password": "$2b$10$xieUbdKkezzaJPYIQNJFTO7t.Sq5qDlXqA2oWOB5AMVdBd7hWxePe",
+  "isAdmin": true
+},{
+  "_id": {
+    "$oid": "5ebb017349ae49614c6aadb2"
+  },
+  "user_name": "A",
+  "email": "aa@test.com",
+  "password": "$2b$10$KhGewCi8gsMGJzGONzGvn.u2K8Ya31FgW2UkgqjZ0lF8bG/vXppBe",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5ebb018049ae49614c6aadb3"
+  },
+  "user_name": "B",
+  "email": "bb@test.com",
+  "password": "$2b$10$LwyyyG.6Sc4lXzlC1S.QOeV7H67w6wb1JgYimd7/IABlztrzvFEyq",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5ebb018d49ae49614c6aadb4"
+  },
+  "user_name": "C",
+  "email": "cc@test.com",
+  "password": "$2b$10$d7gxa6o6UCg.qRyvl2Dt.OgThF0J3qUYhkwKOXpVuexiFvxsfL0DC",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5ebb019949ae49614c6aadb5"
+  },
+  "user_name": "D",
+  "email": "dd@test.com",
+  "password": "$2b$10$WeJUqlg/1kGYtY89cBdzZOwQ6GRSJ51AfTvE.BsR9.YaXFEQE.eIa",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5ebd93969bfb0c4ae8334b5b"
+  },
+  "isAdmin": false,
+  "user_name": "storyteller",
+  "email": "st@story.com",
+  "password": "$2b$10$KyV6duCo3lf/.TzZTevBkOeEkkV1SMPhlpZvE0oFttXSkl48IUTti"
+}]
