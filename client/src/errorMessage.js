@@ -6,7 +6,7 @@ function errorMessage(props) {
         <Toast
             style={{
                 position: 'absolute',
-                top: 0,
+                top: '10%',
                 right: 0,
             }}
             onClose={props.onClose} show={props.show} delay={4000} autohide>

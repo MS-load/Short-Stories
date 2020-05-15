@@ -9,7 +9,7 @@ export default class CenteredModal extends React.Component {
         super(props);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event, currentUser) {
         event.preventDefault()
         let values
         if (this.props.operation === 'edit') {
@@ -27,7 +27,7 @@ export default class CenteredModal extends React.Component {
                 token: this.props.token
             }
         }
-        this.props.submitForm(values)
+        this.props.submitForm(values, currentUser)
         this.props.onHide()
     }
 
@@ -49,7 +49,7 @@ export default class CenteredModal extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={(e) => this.handleSubmit(e)}>
+                    <Form onSubmit={(e) => this.handleSubmit(e, this.props.currentUser)}>
                         <Form.Group controlId="storyTitle">
                             <Form.Label>Story Title</Form.Label>
                             <Form.Control

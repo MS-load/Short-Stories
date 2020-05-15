@@ -35,38 +35,48 @@ export default class StoriesList extends React.Component {
             })
     }
 
-    // logout() {
-    //     let value = this.context 
-    //     console.log(value.token)
-    //     // axios.post('http://localhost:5000/users/logout', currentUser.user.token)
-    //     //     .then(res => {
-    //     //         console.log(res)
-    //     //         currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
-    //     //     }).catch(error => {
-    //     //         console.log(error)
-    //     //     })
-    // }
+    logout(currentUser) {
+        
+        axios.post('http://localhost:5000/users/logout', currentUser.user.token)
+            .then(res => {
+                console.log(res)
+                currentUser.setUser({ name: '', id: '', isAdmin: false, token: '' })
+                alert('Session time-out you have been logged out')
+            }).catch(error => {
+                console.log(error)
+            })
+    }
 
     deleteStory(storyToDelete, currentUser) {
-        console.log(storyToDelete)
+        // console.log(storyToDelete)
         storyToDelete.token = currentUser.user.token
         axios.delete('http://localhost:5000/stories', { data: storyToDelete })
             .then(res => {
                 this.setState({ update: !this.state.update })
+                console.log('123')
             }).catch(error => {
                 console.log(error)
-
+                if (error.response) {
+                        if(error.response.status === 403){
+                            this.logout(currentUser)
+                        }                 
+                }
             })
     }
 
     editStory(storyToEdit, currentUser) {
         console.log({ storyToEdit })
-     //   console.log(storyToEdit)
+        //   console.log(storyToEdit)
         axios.put('http://localhost:5000/stories', storyToEdit)
             .then(res => {
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
+                if (error.response) {
+                        if(error.response.status === 403){
+                            this.logout(currentUser)
+                        }                 
+                }
             })
     }
 
@@ -79,6 +89,11 @@ export default class StoriesList extends React.Component {
                 this.setState({ update: !this.state.update })
             }).catch(error => {
                 console.log(error)
+                if (error.response) {
+                        if(error.response.status === 403){
+                            this.logout()
+                        }                 
+                }
             })
     }
 
@@ -134,6 +149,7 @@ export default class StoriesList extends React.Component {
                                 submitForm={this.editStory}
                                 token={currentUser.user.token}
                                 operation='edit'
+                                currentUser={currentUser}
                             />
                         </Container>
                     </div>
@@ -142,3 +158,4 @@ export default class StoriesList extends React.Component {
         )
     }
 }
+

@@ -46,7 +46,7 @@ router.delete('/', async (req, res) => {
             try {
                 if (err) {
                     Users.removeToken(token)
-                    return res.send({error : 'user has been logged out', token: token})
+                    return res.sendStatus(403)
                 }
 
                 const decoded = await jwt_decode(token)

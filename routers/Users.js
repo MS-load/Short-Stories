@@ -2,7 +2,6 @@ const express = require('express')
 const users = express.Router()
 
 const jwt = require('jsonwebtoken')
-const jwy_decode = require('jwt-decode')
 const bcrypt = require('bcrypt')
 
 const User = require('../models/userModel')
@@ -63,7 +62,7 @@ users.post('/login', (req, res) => {
             email: user.email
           }
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: '24h'
+            expiresIn: '3h'
           })
           tokens.push(token)
           //const userDetails = { id: user._id, isAdmin: user.isAdmin, token: token }
@@ -84,9 +83,7 @@ users.post('/login', (req, res) => {
 
 users.post('/logout', (req, res) => {
   removeToken(req.body)
-
   res.status(200).send({message : 'LoggedOut'})
-
 })
 
 
