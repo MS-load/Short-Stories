@@ -133,9 +133,9 @@ export default class StoriesList extends React.Component {
                                             >
                                                 Delete</Button>
                             updated: {(story.updatedAt).substring(0, 10)}
-                                            <Button variant="outline-primary" className="btn-sm"
+                                            <Button variant="outline-primary" className="btn-sm btn-outline-info"
                                                 onClick={() => this.setState({ modal: true, modelStory: story })}
-                                                style={{ visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
+                                                style={{  visibility: currentUser.user.id === story.userId || currentUser.user.isAdmin === true ? 'show' : 'hidden' }}
                                             >Edit</Button>
                                         </Card.Footer>
                                     </Card>

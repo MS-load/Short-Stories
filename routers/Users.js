@@ -1,9 +1,7 @@
 const express = require('express')
 const users = express.Router()
-
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-
 const User = require('../models/userModel')
 
 process.env.SECRET_KEY = 'secret'
@@ -19,7 +17,7 @@ function removeToken(qtoken){
 }
 
 users.post('/register', (req, res) => {
-  const today = new Date()
+  
   const userData = req.body
   User.findOne({
     email: req.body.email
